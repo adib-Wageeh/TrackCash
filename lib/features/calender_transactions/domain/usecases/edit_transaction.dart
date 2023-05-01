@@ -5,14 +5,14 @@ import 'package:track_cash/core/usecases/usecase.dart';
 import '../entities/transaction.dart';
 import '../repository/transaction_repository.dart';
 
-class RemoveTransaction implements UseCase<bool,Params>{
+class EditTransaction implements UseCase<bool,Params>{
 
   final TransactionRepository transactionRepository;
 
-  RemoveTransaction({required this.transactionRepository});
+  EditTransaction({required this.transactionRepository});
 
   @override
-  Future<Either<Failure,bool>?> call(Params params)async{
+  Future<Either<Failure,bool>> call(Params params)async{
 
     return await transactionRepository.addTransaction(params.transaction);
 
@@ -22,7 +22,7 @@ class RemoveTransaction implements UseCase<bool,Params>{
 
 class Params extends Equatable{
 
-  Transaction transaction;
+  TransactionEntitie transaction;
   Params({required this.transaction});
 
   @override

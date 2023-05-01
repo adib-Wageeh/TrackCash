@@ -12,7 +12,7 @@ class AddTransaction implements UseCase<bool,Params>{
   AddTransaction({required this.transactionRepository});
 
   @override
-  Future<Either<Failure,bool>?> call(Params params)async{
+  Future<Either<Failure,bool>> call(Params params)async{
 
     return await transactionRepository.addTransaction(params.transaction);
 
@@ -22,7 +22,7 @@ class AddTransaction implements UseCase<bool,Params>{
 
 class Params extends Equatable{
 
-  Transaction transaction;
+  TransactionEntitie transaction;
   Params({required this.transaction});
 
   @override

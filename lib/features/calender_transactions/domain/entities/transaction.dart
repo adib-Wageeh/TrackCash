@@ -1,19 +1,21 @@
 import 'package:equatable/equatable.dart';
 import '../../../../core/enums/enums.dart';
 
-class Transaction extends Equatable{
+class TransactionEntitie extends Equatable{
 
+  final int id;
   final double amount;
   final TransactionType type;
   final DateTime date;
 
-  const Transaction({required this.type,required this.date,required this.amount});
+  const TransactionEntitie({required this.type,required this.date,required this.amount,required this.id});
 
   @override
   List<Object?> get props => [
     amount,
     type,
     date,
+    id
   ];
 
 }

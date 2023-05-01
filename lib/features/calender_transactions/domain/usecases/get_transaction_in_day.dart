@@ -5,14 +5,14 @@ import 'package:track_cash/core/usecases/usecase.dart';
 import '../entities/transaction.dart';
 import '../repository/transaction_repository.dart';
 
-class GetTransactionInDay implements UseCase<List<Transaction>,Params>{
+class GetTransactionInDay implements UseCase<List<TransactionEntitie>,Params>{
 
   final TransactionRepository transactionRepository;
 
   GetTransactionInDay({required this.transactionRepository});
 
   @override
-  Future<Either<Failure,List<Transaction>>?> call(Params params)async{
+  Future<Either<Failure,List<TransactionEntitie>>> call(Params params)async{
 
     return await transactionRepository.getTransactionsInDay(params.dateTime);
 

@@ -18,10 +18,10 @@ void main(){
   usecase = GetTransactionInDay(transactionRepository:mockTransactionRepository);
   });
 
-  List<Transaction> transactions = [
-    Transaction(type: TransactionType.add(Income(categoryType: IncomeCategory.salary)), date: DateTime(2023,4,29), amount: 2000),
-    Transaction(type: TransactionType.add(Expense(category: ExpenseCategory.food)), date: DateTime(2023,4,29), amount: 2000),
-    Transaction(type: TransactionType.add(Expense(category: ExpenseCategory.transportation)), date: DateTime(2023,4,29), amount: 2000),
+  List<TransactionEntitie> transactions = [
+    TransactionEntitie(type: TransactionType.add(Income(categoryType: IncomeCategory.salary)), date: DateTime(2023,4,29), amount: 2000),
+    TransactionEntitie(type: TransactionType.add(Expense(category: ExpenseCategory.food)), date: DateTime(2023,4,29), amount: 2000),
+    TransactionEntitie(type: TransactionType.add(Expense(category: ExpenseCategory.transportation)), date: DateTime(2023,4,29), amount: 2000),
   ];
 
   test("should get list of Transactions from local repository in specific day", ()async{

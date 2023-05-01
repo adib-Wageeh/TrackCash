@@ -4,6 +4,23 @@ abstract class Failure extends Equatable{
 
   final String error;
 
-  const Failure({required this.error});
+  const Failure(this.error);
+
+
+}
+
+class LocalDatabaseFailure extends Failure{
+
+  const LocalDatabaseFailure(super.error);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [super.error];
+
+
+
+
+
+
 
 }

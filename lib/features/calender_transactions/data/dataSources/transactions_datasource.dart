@@ -1,11 +1,11 @@
-import '../../domain/entities/transaction.dart';
+import '../models/transaction_model.dart';
 
 abstract class TransactionDatasource{
 
-  Future<bool> addTransaction(Transaction transaction);
-  Future<bool> removeTransaction(Transaction transaction);
-  Future<bool> editTransaction(Transaction transaction);
-  Future<Transaction> getTransactionsInDay(DateTime? dateTime);
-  Future<Transaction> getTransactionsInMonth(DateTime dateTime);
+  Future<int> addTransaction(TransactionModel transaction);
+  Future<int> removeTransaction(TransactionModel transaction);
+  Future<int> editTransaction(TransactionModel transaction);
+  Future<List<Map<String,dynamic>>> getTransactionsInDay(DateTime dateTime);
+  Future<List<Map<String,dynamic>>> getTransactionsInMonth(DateTime dateTime);
 
 }

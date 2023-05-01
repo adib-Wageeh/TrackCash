@@ -1,5 +1,88 @@
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:track_cash/core/injection_container.dart';
+import 'package:track_cash/features/calender_transactions/domain/usecases/get_transactions_in_month.dart';
+import 'package:track_cash/features/calender_transactions/presentation/cubit/get_transactions_per_month/get_transactions_per_month_cubit.dart';
+import 'features/calender_transactions/domain/usecases/get_transaction_in_day.dart';
+import 'features/calender_transactions/presentation/cubit/app_bar/app_bar_cubit.dart';
+import 'features/calender_transactions/presentation/cubit/get_transactions_per_day/get_transactions_per_day_cubit.dart';
+import 'features/calender_transactions/presentation/pages/add_transaction_page.dart';
+import 'features/calender_transactions/presentation/pages/calender_page.dart';
+import 'features/calender_transactions/presentation/pages/reports.dart';
+import 'features/settings/presentation/pages/settings_page.dart';
 
 void main() {
-  runApp(const MyApp());
+
+  WidgetsFlutterBinding.ensureInitialized();
+  init();
+  EasyLoading.instance
+    ..backgroundColor = Colors.white
+    ..indicatorColor = Colors.deepPurpleAccent
+    ..maskColor = Colors.deepPurpleAccent
+    ..userInteractions = false;
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider<GetTransactionsPerDayCubit>(create: (context)=>GetTransactionsPerDayCubit(getTransactionInDay: getIt<GetTransactionInDay>())..getTransactionsPerDay(DateTime.now())),
+    BlocProvider<GetTransactionsPerMonthCubit>(create: (context)=>GetTransactionsPerMonthCubit(getTransactionInMonth: getIt<GetTransactionInMonth>())..getTransactionsPerMonth(DateTime.now())),
+    BlocProvider<AppBarCubit>(create: (context)=>AppBarCubit()),
+  ]
+    ,child: MaterialApp(
+      home: const HomePage(),
+      debugShowCheckedModeBanner: false,
+      builder: EasyLoading.init(),
+    ),));
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        body: BlocBuilder<AppBarCubit,AppBarState>(
+          builder: (context,state){
+            if(state is AppBarAdd){
+              return const AddTransactionPage();
+            }else if(state is AppBarReport){
+              return const TransactionsReports();
+            }else if(state is AppBarSettings){
+              return const SettingsPage();
+            }
+            return const CalendarPage();
+          },
+        )
+          ,
+          bottomNavigationBar: ConvexAppBar(
+            height: 55,
+            top: -20,
+            elevation: 5,
+            backgroundColor: const Color(0xff691515),
+            items: const [
+              TabItem(icon: Icons.calendar_month_rounded, title: 'Calender'),
+              TabItem(icon: Icons.add, title: 'Add'),
+              TabItem(icon: Icons.query_stats_rounded, title: 'Report'),
+              TabItem(icon: Icons.settings, title: 'Settings'),
+            ],
+            onTap: (int i) {
+              final cubit = BlocProvider.of<AppBarCubit>(context);
+              switch(i){
+                case 0:
+                  cubit.setCalenderView();
+                  break;
+                case 1:
+                  cubit.setAddView();
+                  break;
+                case 2:
+                  cubit.setReportView();
+                  break;
+                case 3:
+                  cubit.setSettingsView();
+                  break;
+              }
+            }),
+          )
+      );
+  }
 }

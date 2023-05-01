@@ -39,10 +39,14 @@ dependencies:
   get_it: ^7.3.0
   flutter_easyloading: ^3.0.5
   dartz: ^0.10.1
-  hive: ^2.2.3
-  hive_flutter: ^1.1.0
   mockito: ^5.4.0
   gsheets: ^0.4.2
+  sqflite: ^2.2.8
+  path: ^1.8.2
+  bloc: ^8.1.1
+  flutter_bloc: ^8.1.2
+  convex_bottom_bar: ^3.2.0
+  table_calendar: ^3.0.9
 
 dev_dependencies:
   flutter_test:
@@ -67,8 +71,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+      - assets/box.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
