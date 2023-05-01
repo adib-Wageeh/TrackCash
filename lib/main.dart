@@ -11,6 +11,7 @@ import 'features/calender_transactions/presentation/cubit/get_transactions_per_d
 import 'features/calender_transactions/presentation/pages/add_transaction_page.dart';
 import 'features/calender_transactions/presentation/pages/calender_page.dart';
 import 'features/calender_transactions/presentation/pages/reports.dart';
+import 'features/settings/presentation/cubit/theme_changer/theme_cubit.dart';
 import 'features/settings/presentation/pages/settings_page.dart';
 
 void main() {
@@ -23,15 +24,25 @@ void main() {
     ..maskColor = Colors.deepPurpleAccent
     ..userInteractions = false;
   runApp(MultiBlocProvider(providers: [
-    BlocProvider<GetTransactionsPerDayCubit>(create: (context)=>GetTransactionsPerDayCubit(getTransactionInDay: getIt<GetTransactionInDay>())..getTransactionsPerDay(DateTime.now())),
-    BlocProvider<GetTransactionsPerMonthCubit>(create: (context)=>GetTransactionsPerMonthCubit(getTransactionInMonth: getIt<GetTransactionInMonth>())..getTransactionsPerMonth(DateTime.now())),
+    BlocProvider<GetTransactionsPerDayCubit>(create: (context)=>GetTransactionsPerDayCubit(getTransactionInDay: getIt<GetTransactionInDay>())),
+    BlocProvider<GetTransactionsPerMonthCubit>(create: (context)=>GetTransactionsPerMonthCubit(getTransactionInMonth: getIt<GetTransactionInMonth>())),
     BlocProvider<AppBarCubit>(create: (context)=>AppBarCubit()),
+    BlocProvider<ThemeCubit>(create: (context)=>ThemeCubit()..toggleTheme(true)),
+
   ]
-    ,child: MaterialApp(
-      home: const HomePage(),
-      debugShowCheckedModeBanner: false,
-      builder: EasyLoading.init(),
-    ),));
+    ,child: BlocBuilder<ThemeCubit, ThemeState>(
+  builder: (context, state) {
+    if(state is setTheme) {
+      return MaterialApp(
+        home: const HomePage(),
+        theme: state.themeData,
+        debugShowCheckedModeBanner: false,
+        builder: EasyLoading.init(),
+      );
+    }
+    return Container();
+  },
+),));
 }
 
 class HomePage extends StatelessWidget {
@@ -50,6 +61,7 @@ class HomePage extends StatelessWidget {
             }else if(state is AppBarSettings){
               return const SettingsPage();
             }
+            BlocProvider.of<GetTransactionsPerDayCubit>(context).getTransactionsPerDay(BlocProvider.of<GetTransactionsPerDayCubit>(context).selectedDay);
             return const CalendarPage();
           },
         )

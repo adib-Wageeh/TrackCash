@@ -9,11 +9,12 @@ class GetTransactionsPerDayCubit extends Cubit<GetTransactionsPerDayState> {
   GetTransactionsPerDayCubit({required this.getTransactionInDay}) : super(GetTransactionsPerDayInitial());
 
   GetTransactionInDay getTransactionInDay;
-
+  DateTime selectedDay = DateTime.now();
 
   getTransactionsPerDay(DateTime dateTime)async{
 
-    //emit(GetTransactionsPerDayLoading());
+    emit(GetTransactionsPerDayLoading());
+    selectedDay = dateTime;
     final result = await getTransactionInDay.call(Params(dateTime: dateTime));
 
     result.fold((error)=> emit(GetTransactionsPerDayError(error: error.error))
