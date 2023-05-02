@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:track_cash/features/settings/presentation/cubit/theme_changer/theme_cubit.dart';
-import '../../../../core/assets/assets.dart';
+import '../../../../../core/assets/assets.dart';
 
 class EmptyDayWidget extends StatelessWidget {
   const EmptyDayWidget({Key? key}) : super(key: key);

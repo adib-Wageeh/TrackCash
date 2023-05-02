@@ -12,11 +12,10 @@ class TransactionRepositoryImplementation implements TransactionRepository{
   TransactionRepositoryImplementation({required this.transactionDatasource});
 
   @override
-  Future<Either<Failure, bool>> addTransaction(TransactionEntitie transaction) async{
+  Future<Either<Failure, bool>> addTransaction(TransactionType transactionType,double amount,DateTime dateTime) async{
 
     try {
-      TransactionModel transactionModel = TransactionModel(type: transaction.type, amount: transaction.amount, date: transaction.date, id: transaction.id);
-      await transactionDatasource.addTransaction(transactionModel);
+      await transactionDatasource.addTransaction(transactionType,amount,dateTime);
         return const Right(true);
     }catch(e) {
     return Left(LocalDatabaseFailure(e.toString()));

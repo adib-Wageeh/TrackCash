@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:track_cash/features/calender_transactions/presentation/cubit/get_transactions_per_day/get_transactions_per_day_cubit.dart';
-import '../widgets/empty_day_widget.dart';
-import '../widgets/table_widget.dart';
+import '../widgets/calender_page/empty_day_widget.dart';
+import '../widgets/calender_page/table_widget.dart';
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({Key? key}) : super(key: key);

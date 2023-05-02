@@ -11,7 +11,7 @@ class ToggleButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return LiteRollingSwitch(
       value: BlocProvider.of<ThemeCubit>(context).toggleVal,
-      width: 130,
+      width: 120,
       textSize: 18,
       textOn: 'Light',
       textOnColor: Colors.white,

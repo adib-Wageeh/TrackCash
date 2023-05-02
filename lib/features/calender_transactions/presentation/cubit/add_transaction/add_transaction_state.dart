@@ -5,6 +5,17 @@ abstract class AddTransactionState {}
 
 class AddTransactionInitial extends AddTransactionState {}
 
+class AddTransactionExpense extends AddTransactionState {
+  final List list;
+  final Map<String,dynamic> images;
+  AddTransactionExpense({required this.list,required this.images});
+}
+class AddTransactionIncome extends AddTransactionState {
+  final List list;
+  final Map<String,dynamic> images;
+  AddTransactionIncome({required this.list,required this.images});
+}
+
 class AddTransactionLoading extends AddTransactionState {}
 
 class AddTransactionError extends AddTransactionState {
@@ -13,3 +24,4 @@ class AddTransactionError extends AddTransactionState {
 }
 
 class AddTransactionDone extends AddTransactionState {}
+

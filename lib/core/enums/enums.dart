@@ -1,13 +1,8 @@
-
-// enum TransactionType{
-//   expense,income
-// }
-
 enum ExpenseCategory{
-  food,socialLife,selfDevelopment,transportation
-  ,household,apparel,beauty,health,education,other
+  Food,SelfDevelopment,Transportation
+  ,Household,Apparel,Beauty,Health,Education
 }
 
 enum IncomeCategory{
-  salary,bonus,allowance,other
+  Salary,Bonus,Allowance,Loan
 }

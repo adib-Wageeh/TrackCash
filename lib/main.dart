@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:track_cash/core/injection_container.dart';
+import 'package:track_cash/features/calender_transactions/domain/usecases/add_transaction.dart';
 import 'package:track_cash/features/calender_transactions/domain/usecases/get_transactions_in_month.dart';
+import 'package:track_cash/features/calender_transactions/presentation/cubit/add_transaction/add_transaction_cubit.dart';
+import 'package:track_cash/features/calender_transactions/presentation/cubit/change_category/change_category_cubit.dart';
 import 'package:track_cash/features/calender_transactions/presentation/cubit/get_transactions_per_month/get_transactions_per_month_cubit.dart';
 import 'features/calender_transactions/domain/usecases/get_transaction_in_day.dart';
 import 'features/calender_transactions/presentation/cubit/app_bar/app_bar_cubit.dart';
@@ -28,6 +31,8 @@ void main() {
     BlocProvider<GetTransactionsPerMonthCubit>(create: (context)=>GetTransactionsPerMonthCubit(getTransactionInMonth: getIt<GetTransactionInMonth>())),
     BlocProvider<AppBarCubit>(create: (context)=>AppBarCubit()),
     BlocProvider<ThemeCubit>(create: (context)=>ThemeCubit()..toggleTheme(true)),
+    BlocProvider<AddTransactionCubit>(create: (context)=>AddTransactionCubit(addTransaction: getIt<AddTransaction>())..switchTransactionType(true)),
+    BlocProvider<ChangeCategoryCubit>(create: (context)=>ChangeCategoryCubit()..onCategoryChange(newCategoryIndex: 0)),
 
   ]
     ,child: BlocBuilder<ThemeCubit, ThemeState>(
@@ -50,51 +55,50 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: BlocBuilder<AppBarCubit,AppBarState>(
-          builder: (context,state){
-            if(state is AppBarAdd){
-              return const AddTransactionPage();
-            }else if(state is AppBarReport){
-              return const TransactionsReports();
-            }else if(state is AppBarSettings){
-              return const SettingsPage();
+    return Scaffold(
+      body: BlocBuilder<AppBarCubit,AppBarState>(
+        builder: (context,state){
+          if(state is AppBarAdd){
+            BlocProvider.of<AddTransactionCubit>(context).clearAddPage(context);
+            return const AddTransactionPage();
+          }else if(state is AppBarReport){
+            return const TransactionsReports();
+          }else if(state is AppBarSettings){
+            return const SettingsPage();
+          }
+          BlocProvider.of<GetTransactionsPerDayCubit>(context).getTransactionsPerDay(BlocProvider.of<GetTransactionsPerDayCubit>(context).selectedDay);
+          return const CalendarPage();
+        },
+      )
+        ,
+        bottomNavigationBar: ConvexAppBar(
+          height: 55,
+          top: -20,
+          elevation: 5,
+          backgroundColor: const Color(0xff691515),
+          items: const [
+            TabItem(icon: Icons.calendar_month_rounded, title: 'Calender'),
+            TabItem(icon: Icons.add, title: 'Add'),
+            TabItem(icon: Icons.query_stats_rounded, title: 'Report'),
+            TabItem(icon: Icons.settings, title: 'Settings'),
+          ],
+          onTap: (int i) {
+            final cubit = BlocProvider.of<AppBarCubit>(context);
+            switch(i){
+              case 0:
+                cubit.setCalenderView();
+                break;
+              case 1:
+                cubit.setAddView();
+                break;
+              case 2:
+                cubit.setReportView();
+                break;
+              case 3:
+                cubit.setSettingsView();
+                break;
             }
-            BlocProvider.of<GetTransactionsPerDayCubit>(context).getTransactionsPerDay(BlocProvider.of<GetTransactionsPerDayCubit>(context).selectedDay);
-            return const CalendarPage();
-          },
-        )
-          ,
-          bottomNavigationBar: ConvexAppBar(
-            height: 55,
-            top: -20,
-            elevation: 5,
-            backgroundColor: const Color(0xff691515),
-            items: const [
-              TabItem(icon: Icons.calendar_month_rounded, title: 'Calender'),
-              TabItem(icon: Icons.add, title: 'Add'),
-              TabItem(icon: Icons.query_stats_rounded, title: 'Report'),
-              TabItem(icon: Icons.settings, title: 'Settings'),
-            ],
-            onTap: (int i) {
-              final cubit = BlocProvider.of<AppBarCubit>(context);
-              switch(i){
-                case 0:
-                  cubit.setCalenderView();
-                  break;
-                case 1:
-                  cubit.setAddView();
-                  break;
-                case 2:
-                  cubit.setReportView();
-                  break;
-                case 3:
-                  cubit.setSettingsView();
-                  break;
-              }
-            }),
-          )
-      );
+          }),
+        );
   }
 }

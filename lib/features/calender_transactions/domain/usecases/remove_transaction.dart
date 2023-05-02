@@ -14,7 +14,7 @@ class RemoveTransaction implements UseCase<bool,Params>{
   @override
   Future<Either<Failure,bool>> call(Params params)async{
 
-    return await transactionRepository.addTransaction(params.transaction);
+    return await transactionRepository.removeTransaction(params.transaction);
 
   }
 

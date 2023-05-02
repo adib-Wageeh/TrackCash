@@ -13,7 +13,7 @@ class TransactionModel extends TransactionEntitie{
 
   factory TransactionModel.fromJson(Map<String,dynamic> json){
     return TransactionModel(type: TransactionType(type: json['type'],category: json['category']),
-        amount: json['amount'],
+        amount: double.parse(json['amount']),
         date: DateTime(json['year'],json['month'],json['day']), id: json['id']);
   }
 

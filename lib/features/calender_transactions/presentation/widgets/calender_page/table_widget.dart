@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:table_calendar/table_calendar.dart';
-import '../cubit/get_transactions_per_day/get_transactions_per_day_cubit.dart';
+import '../../cubit/get_transactions_per_day/get_transactions_per_day_cubit.dart';
 
 class TableWidget extends StatelessWidget {
   const TableWidget({Key? key}) : super(key: key);

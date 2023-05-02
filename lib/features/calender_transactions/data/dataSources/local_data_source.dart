@@ -1,6 +1,7 @@
 import 'package:path/path.dart';
 import 'package:track_cash/features/calender_transactions/data/dataSources/transactions_datasource.dart';
 import 'package:sqflite/sqflite.dart';
+import '../../domain/entities/transaction.dart';
 import '../models/transaction_model.dart';
 
 class LocalDataSource implements TransactionDatasource{
@@ -33,11 +34,11 @@ void _onCreate(Database db,int version)async{
 }
 
   @override
-  Future<int> addTransaction(TransactionModel transaction) async{
+  Future<int> addTransaction(TransactionType transactionType,double amount,DateTime dateTime) async{
     Database dbRef = await db;
     int result = await dbRef.rawInsert('''
     INSERT INTO transactions(category,type,day,month,year,amount) VALUES 
-    (${transaction.type.category},${transaction.type.type},${transaction.date.day},${transaction.date.month},${transaction.date.year},${transaction.amount.toString()})
+    ("${transactionType.category}","${transactionType.type}","${dateTime.day}","${dateTime.month}","${dateTime.year}",${amount.toString()})
     ''');
     return result;
   }
@@ -47,7 +48,7 @@ void _onCreate(Database db,int version)async{
     Database dbRef = await db;
     int result = await dbRef.rawUpdate('''
     UPDATE transactions transactions(category,type,day,month,year,amount) VALUES 
-    (${transaction.type.category},${transaction.type.type},${transaction.date.day},${transaction.date.month},${transaction.date.year},${transaction.amount.toString()})
+    ("${transaction.type.category}",${transaction.type.type},${transaction.date.day},${transaction.date.month},${transaction.date.year},${transaction.amount.toString()})
     ''');
     return result;
   }
@@ -56,7 +57,7 @@ void _onCreate(Database db,int version)async{
   Future<List<Map<String,dynamic>>> getTransactionsInDay(DateTime dateTime) async{
     Database dbRef = await db;
     List<Map<String,dynamic>> result = await dbRef.rawQuery('''
-    SELECT * FROM transactions WHERE 'year'= ${dateTime.year} AND 'month'= ${dateTime.month} AND 'day'= ${dateTime.day}     
+    SELECT * FROM transactions WHERE year = "${dateTime.year}" AND month = "${dateTime.month}" AND day = "${dateTime.day}"
        ''');
     return result;
   }

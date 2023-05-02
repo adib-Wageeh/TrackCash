@@ -9,7 +9,6 @@ class AppBarCubit extends Cubit<AppBarState> {
 
 
   void setCalenderView(){
-
     emit(AppBarInitial());
   }
 

@@ -16,10 +16,8 @@ class GetTransactionsPerDayCubit extends Cubit<GetTransactionsPerDayState> {
     emit(GetTransactionsPerDayLoading());
     selectedDay = dateTime;
     final result = await getTransactionInDay.call(Params(dateTime: dateTime));
-
     result.fold((error)=> emit(GetTransactionsPerDayError(error: error.error))
     ,(transactions)=> emit(GetTransactionsPerDayLoaded(transactions: transactions)));
-
   }
 
 }

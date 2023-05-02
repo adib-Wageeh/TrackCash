@@ -48,6 +48,9 @@ dependencies:
   convex_bottom_bar: ^3.2.0
   table_calendar: ^3.0.9
   lite_rolling_switch: ^1.0.1
+  calendar_date_picker2: ^0.5.2
+  scale_button: ^2.1.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -74,6 +77,18 @@ flutter:
   assets:
       - assets/box.png
       - assets/boxWhite.png
+      - assets/expense/bus.png
+      - assets/expense/education.png
+      - assets/expense/grocery.png
+      - assets/expense/healthcare.png
+      - assets/expense/home.png
+      - assets/expense/skincare.png
+      - assets/expense/specification.png
+      - assets/expense/wardrobe.png
+      - assets/income/gift.png
+      - assets/income/give-money.png
+      - assets/income/money.png
+      - assets/income/signing.png
 
   #   - images/a_dot_ham.jpeg
 

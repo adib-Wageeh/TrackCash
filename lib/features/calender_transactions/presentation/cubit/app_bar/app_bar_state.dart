@@ -5,6 +5,7 @@ abstract class AppBarState {}
 
 class AppBarInitial extends AppBarState {}
 
+
 class AppBarAdd extends AppBarState {}
 
 class AppBarReport extends AppBarState {}
