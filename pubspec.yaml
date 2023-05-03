@@ -50,6 +50,7 @@ dependencies:
   lite_rolling_switch: ^1.0.1
   calendar_date_picker2: ^0.5.2
   scale_button: ^2.1.2
+  fl_chart: ^0.62.0
 
 dev_dependencies:
   flutter_test:

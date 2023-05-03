@@ -14,7 +14,7 @@ class EditTransaction implements UseCase<bool,Params>{
   @override
   Future<Either<Failure,bool>> call(Params params)async{
 
-    return await transactionRepository.editTransaction(params.transaction);
+    return await transactionRepository.editTransaction(params.transaction,params.amount,params.description,params.dateTime);
 
   }
 
@@ -23,7 +23,10 @@ class EditTransaction implements UseCase<bool,Params>{
 class Params extends Equatable{
 
   TransactionEntitie transaction;
-  Params({required this.transaction});
+  final String amount;
+  final String description;
+  final DateTime dateTime;
+  Params({required this.transaction,required this.dateTime,required this.amount,required this.description});
 
   @override
   List<Object?> get props => [transaction];

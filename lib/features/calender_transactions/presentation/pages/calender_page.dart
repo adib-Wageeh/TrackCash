@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:track_cash/features/calender_transactions/presentation/cubit/get_transactions_per_day/get_transactions_per_day_cubit.dart';
 import '../widgets/calender_page/empty_day_widget.dart';
 import '../widgets/calender_page/table_widget.dart';
+import '../widgets/calender_page/transaction_list_widget.dart';
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({Key? key}) : super(key: key);
@@ -30,8 +31,9 @@ class _CalendarPageState extends State<CalendarPage> {
           );
         }else{
           return Column(
-            children: const [
-              TableWidget(),
+            children: [
+              const TableWidget(),
+              TransactionsListWidget(transactions: state.transactions,)
             ],
           );
         }

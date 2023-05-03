@@ -14,8 +14,9 @@ class CategoriesGridViewWidget extends StatelessWidget {
     return BlocBuilder<ChangeCategoryCubit, ChangeCategoryState>(
       builder: (context, state) {
         if(state is ChangeCategoryLoaded) {
-          return Expanded(
-            child: Column(
+          return SizedBox(
+          height: 240
+          ,child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Padding(
@@ -24,6 +25,7 @@ class CategoriesGridViewWidget extends StatelessWidget {
                 ),
                 Expanded(
                   child: GridView(
+                    physics: const NeverScrollableScrollPhysics(),
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 4), padding: EdgeInsets.zero,
                     children: List.generate(data.length, (index) =>

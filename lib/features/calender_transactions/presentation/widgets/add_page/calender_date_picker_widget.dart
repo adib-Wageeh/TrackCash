@@ -5,8 +5,7 @@ import '../../../../../core/assets/assets.dart';
 import '../../cubit/add_transaction/add_transaction_cubit.dart';
 
 class CalenderDatePickerWidget extends StatelessWidget {
-  final List state;
-  const CalenderDatePickerWidget({required this.state,Key? key}) : super(key: key);
+  const CalenderDatePickerWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +17,8 @@ class CalenderDatePickerWidget extends StatelessWidget {
             onPressed: ()async{
                await showCalendarDatePicker2Dialog(
                 context: context,
-                config: CalendarDatePicker2WithActionButtonsConfig(selectedDayTextStyle: const TextStyle(color:Assets.mainColor)),
+                config: CalendarDatePicker2WithActionButtonsConfig(
+                    selectedDayTextStyle: const TextStyle(color:Assets.mainColor)),
                 dialogSize: const Size(325, 400),
                 value: [DateTime.now()],
                 borderRadius: BorderRadius.circular(15),

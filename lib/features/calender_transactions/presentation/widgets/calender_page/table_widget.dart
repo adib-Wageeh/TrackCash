@@ -8,19 +8,22 @@ class TableWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 400,
-      child: TableCalendar(
-        currentDay: BlocProvider.of<GetTransactionsPerDayCubit>(context).selectedDay,
-        focusedDay: DateTime.now()
-        , firstDay: DateTime.utc(2000, 1, 1)
-        , lastDay: DateTime.now().copyWith(year: DateTime.now().year+100),
-        onDaySelected: (dateTime,datetime2){
-          BlocProvider.of<GetTransactionsPerDayCubit>(context).getTransactionsPerDay(dateTime);
-        },
-        calendarStyle: const CalendarStyle(
-          todayDecoration: BoxDecoration(color: Color(0xff691515),
-              shape: BoxShape.circle),
+    return Padding(
+      padding: const EdgeInsets.only(top: 32.0),
+      child: SizedBox(
+        height: 400,
+        child: TableCalendar(
+          currentDay: BlocProvider.of<GetTransactionsPerDayCubit>(context).selectedDay,
+          focusedDay: BlocProvider.of<GetTransactionsPerDayCubit>(context).selectedDay
+          , firstDay: DateTime.utc(2000, 1, 1)
+          , lastDay: DateTime.now().copyWith(year: DateTime.now().year+100),
+          onDaySelected: (dateTime,datetime2){
+            BlocProvider.of<GetTransactionsPerDayCubit>(context).getTransactionsPerDay(dateTime);
+          },
+          calendarStyle: const CalendarStyle(
+            todayDecoration: BoxDecoration(color: Color(0xff691515),
+                shape: BoxShape.circle),
+          ),
         ),
       ),
     );

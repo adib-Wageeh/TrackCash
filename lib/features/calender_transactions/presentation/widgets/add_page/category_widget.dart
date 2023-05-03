@@ -32,7 +32,10 @@ class CategoryWidget extends StatelessWidget {
           ),
         ),
 
-        Text(text.name,overflow: TextOverflow.ellipsis,
+        FittedBox(
+          child: Text(text.name,overflow: TextOverflow.ellipsis,
+            style: TextStyle(color: (selectedIndex == index)? imageWithColor.values.elementAt(index):Theme.of(context).accentColor),
+          ),
         )
       ],
     ),

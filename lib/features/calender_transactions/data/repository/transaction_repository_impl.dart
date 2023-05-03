@@ -12,10 +12,10 @@ class TransactionRepositoryImplementation implements TransactionRepository{
   TransactionRepositoryImplementation({required this.transactionDatasource});
 
   @override
-  Future<Either<Failure, bool>> addTransaction(TransactionType transactionType,double amount,DateTime dateTime) async{
+  Future<Either<Failure, bool>> addTransaction(TransactionType transactionType,double amount,DateTime dateTime,String description) async{
 
     try {
-      await transactionDatasource.addTransaction(transactionType,amount,dateTime);
+      await transactionDatasource.addTransaction(transactionType,amount,dateTime,description);
         return const Right(true);
     }catch(e) {
     return Left(LocalDatabaseFailure(e.toString()));
@@ -23,10 +23,10 @@ class TransactionRepositoryImplementation implements TransactionRepository{
   }
 
   @override
-  Future<Either<Failure, bool>> editTransaction(TransactionEntitie transaction) async{
+  Future<Either<Failure, bool>> editTransaction(TransactionEntitie transaction,String amount,String desc,DateTime dateTime) async{
 
     try{
-    TransactionModel transactionModel = TransactionModel(type: transaction.type, amount: transaction.amount, date: transaction.date, id: transaction.id);
+    TransactionModel transactionModel = TransactionModel(description: desc,type: transaction.type, amount: double.parse(amount), date: dateTime, id: transaction.id,imagePath: transaction.imagePath,color: transaction.color);
     await transactionDatasource.editTransaction(transactionModel);
       return const Right(true);
     }catch(e) {
@@ -65,7 +65,7 @@ class TransactionRepositoryImplementation implements TransactionRepository{
   @override
   Future<Either<Failure, bool>> removeTransaction(TransactionEntitie transaction)async{
     try{
-      TransactionModel transactionModel = TransactionModel(type: transaction.type, amount: transaction.amount, date: transaction.date, id: transaction.id);
+      TransactionModel transactionModel = TransactionModel(description: transaction.description,type: transaction.type, amount: transaction.amount, date: transaction.date, id: transaction.id,color: transaction.color,imagePath: transaction.imagePath);
       await transactionDatasource.removeTransaction(transactionModel);
       return const Right(true);
     }catch(e) {

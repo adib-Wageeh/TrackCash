@@ -4,8 +4,9 @@ class Assets{
 
   static const emptyDayIcon = "assets/box.png";
   static const emptyDayIconWhite = "assets/boxWhite.png";
-
   static const mainColor = Color(0xff691515);
+
+
   static const Map<String,Color> incomeImages = {
     'assets/income/money.png': Color(0xff4ea0ee),
     'assets/income/gift.png':Color(0xffEDC73B),
@@ -15,13 +16,13 @@ class Assets{
 
   static const Map<String,dynamic> expenseImages = {
     "assets/expense/grocery.png": Color(0xff4ea0ee),
-    "assets/expense/specification.png":Color(0xffEDC73B),
+    "assets/expense/skincare.png":Color(0xffE76161),
     "assets/expense/bus.png":Color(0xff37C9A6),
     "assets/expense/home.png":Color(0xffCC45EE),
-    "assets/expense/wardrobe.png":Color(0xff4ea0ee),
-    "assets/expense/skincare.png":Color(0xffEDC73B),
-    "assets/expense/healthcare.png":Color(0xff37C9A6),
-    "assets/expense/education.png":Color(0xffCC45EE)
+    "assets/expense/wardrobe.png":Color(0xffF99B7D),
+    "assets/expense/specification.png":Color(0xffEDC73B),
+    "assets/expense/healthcare.png":Color(0xff917FB3),
+    "assets/expense/education.png":Color(0xff9E6F21)
   };
 
 }

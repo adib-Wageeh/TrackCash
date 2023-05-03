@@ -17,17 +17,18 @@ class AddTransactionCubit extends Cubit<AddTransactionState> {
   late bool isIncomeTransaction;
   String? amount;
   DateTime selectedDate = DateTime.now();
-
+  String? description;
 
   void addTransactionMethod(BuildContext context)async{
 
     int categoryIndex = BlocProvider.of<ChangeCategoryCubit>(context).categoryIndex;
     TransactionType transactionType = TransactionType(type: (isIncomeTransaction)?1:2, category: (isIncomeTransaction)?IncomeCategory.values[categoryIndex].name:ExpenseCategory.values[categoryIndex].name);
-    final result = await addTransaction.call(Params(amount: double.parse(amount!),dateTime: selectedDate,transactionType: transactionType));
+    final result = await addTransaction.call(Params(description: description!,amount: double.parse(amount!),dateTime: selectedDate,transactionType: transactionType));
     result.fold((error){
       emit(AddTransactionError(error: error.error));
     },(transactions){
       emit(AddTransactionDone());
+      clearAddPage(context);
     });
   }
 
@@ -50,6 +51,10 @@ class AddTransactionCubit extends Cubit<AddTransactionState> {
     amount = money;
   }
 
+  void setDescription(txt){
+    description = txt;
+  }
+
   String getAmount(){
     if(amount == null){
       return "";
@@ -58,10 +63,19 @@ class AddTransactionCubit extends Cubit<AddTransactionState> {
 
   }
 
+  String getDescription(){
+    if(description == null){
+      return "";
+    }
+    return description.toString();
+  }
+
   void clearAddPage(BuildContext context){
     BlocProvider.of<ChangeCategoryCubit>(context).onCategoryChange(newCategoryIndex: 0);
     amount = "";
     selectedDate = DateTime.now();
+    description="";
+    switchTransactionType(isIncomeTransaction);
   }
 
 

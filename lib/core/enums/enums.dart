@@ -1,6 +1,6 @@
 enum ExpenseCategory{
-  Food,SelfDevelopment,Transportation
-  ,Household,Apparel,Beauty,Health,Education
+  Food,Beauty,Transportation
+  ,Household,Apparel,SelfDevelopment,Health,Education
 }
 
 enum IncomeCategory{

@@ -15,8 +15,14 @@ Future<Database> get db async => _db ??= await initDb();
 initDb()async{
 final path = await getDatabasesPath();
 final databasePath = join(path,"transactions.db");
-Database myDb = await openDatabase(databasePath,onCreate: _onCreate,version: 1);
+Database myDb = await openDatabase(databasePath,onCreate: _onCreate,version: 4,onUpgrade: _onUpgrade);
 return myDb;
+}
+
+void _onUpgrade(Database db, int oldVersion, int newVersion) {
+  if (oldVersion < newVersion) {
+    db.execute("ALTER TABLE transactions ADD COLUMN description TEXT NOT NULL;");
+  }
 }
 
 void _onCreate(Database db,int version)async{
@@ -28,17 +34,21 @@ void _onCreate(Database db,int version)async{
     day INTEGER NOT NULL,
     month INTEGER NOT NULL,
     year INTEGER NOT NULL,    
-    amount TEXT NOT NULL
+    amount TEXT NOT NULL,
+    description TEXT NOT NULL
     )
     ''');
 }
 
   @override
-  Future<int> addTransaction(TransactionType transactionType,double amount,DateTime dateTime) async{
+  Future<int> addTransaction(TransactionType transactionType,double amount,DateTime dateTime,String description) async{
     Database dbRef = await db;
     int result = await dbRef.rawInsert('''
-    INSERT INTO transactions(category,type,day,month,year,amount) VALUES 
-    ("${transactionType.category}","${transactionType.type}","${dateTime.day}","${dateTime.month}","${dateTime.year}",${amount.toString()})
+    INSERT INTO transactions(category,type,day,month,year,amount,description) VALUES 
+    ("${transactionType.category}","${transactionType.type}",
+    "${dateTime.day}","${dateTime.month}","${dateTime.year}",${amount.toString()},
+    "${description.toString()}"
+    )
     ''');
     return result;
   }
@@ -47,14 +57,22 @@ void _onCreate(Database db,int version)async{
   Future<int> editTransaction(TransactionModel transaction) async{
     Database dbRef = await db;
     int result = await dbRef.rawUpdate('''
-    UPDATE transactions transactions(category,type,day,month,year,amount) VALUES 
-    ("${transaction.type.category}",${transaction.type.type},${transaction.date.day},${transaction.date.month},${transaction.date.year},${transaction.amount.toString()})
+    UPDATE transactions SET category = "${transaction.type.category}",
+    type = "${transaction.type.type}",
+    day = "${transaction.date.day}",
+    month = "${transaction.date.month}",
+    year = "${transaction.date.year}",
+    amount = "${transaction.amount.toString()}",
+    description = "${transaction.description}" WHERE id = "${transaction.id}"
     ''');
     return result;
   }
 
   @override
   Future<List<Map<String,dynamic>>> getTransactionsInDay(DateTime dateTime) async{
+    // Database dbRef2 = await db;
+    // dbRef2.delete("transactions");
+    await initDb();
     Database dbRef = await db;
     List<Map<String,dynamic>> result = await dbRef.rawQuery('''
     SELECT * FROM transactions WHERE year = "${dateTime.year}" AND month = "${dateTime.month}" AND day = "${dateTime.day}"
@@ -75,7 +93,7 @@ void _onCreate(Database db,int version)async{
   Future<int> removeTransaction(TransactionModel transaction) async{
     Database dbRef = await db;
     int result = await dbRef.rawDelete('''
-    REMOVE FROM transactions WHERE 'id' = ${transaction.id}  
+    DELETE FROM transactions WHERE id = "${transaction.id}"
        ''');
     return result;
   }
