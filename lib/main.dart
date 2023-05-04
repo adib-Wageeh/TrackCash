@@ -8,9 +8,10 @@ import 'package:track_cash/features/calender_transactions/domain/usecases/edit_t
 import 'package:track_cash/features/calender_transactions/domain/usecases/get_transactions_in_month.dart';
 import 'package:track_cash/features/calender_transactions/presentation/cubit/add_transaction/add_transaction_cubit.dart';
 import 'package:track_cash/features/calender_transactions/presentation/cubit/change_category/change_category_cubit.dart';
-import 'package:track_cash/features/calender_transactions/presentation/cubit/get_transactions_per_month/get_transactions_per_month_cubit.dart';
 import 'package:track_cash/features/calender_transactions/presentation/cubit/remove_transaction/remove_transaction_cubit.dart';
+import 'package:track_cash/features/calender_transactions/presentation/cubit/report_cubit/get_report_cubit.dart';
 import 'features/calender_transactions/domain/usecases/get_transaction_in_day.dart';
+import 'features/calender_transactions/domain/usecases/get_transactions_total_amount.dart';
 import 'features/calender_transactions/domain/usecases/remove_transaction.dart';
 import 'features/calender_transactions/presentation/cubit/animateContainer/animate_container_cubit.dart';
 import 'features/calender_transactions/presentation/cubit/app_bar/app_bar_cubit.dart';
@@ -33,7 +34,6 @@ void main() {
     ..userInteractions = false;
   runApp(MultiBlocProvider(providers: [
     BlocProvider<GetTransactionsPerDayCubit>(create: (context)=>GetTransactionsPerDayCubit(getTransactionInDay: getIt<GetTransactionInDay>())),
-    BlocProvider<GetTransactionsPerMonthCubit>(create: (context)=>GetTransactionsPerMonthCubit(getTransactionInMonth: getIt<GetTransactionInMonth>())),
     BlocProvider<AppBarCubit>(create: (context)=>AppBarCubit()),
     BlocProvider<ThemeCubit>(create: (context)=>ThemeCubit()..toggleTheme(true)),
     BlocProvider<AddTransactionCubit>(create: (context)=>AddTransactionCubit(addTransaction: getIt<AddTransaction>())..switchTransactionType(true)),
@@ -41,6 +41,7 @@ void main() {
     BlocProvider<AnimateContainerCubit>(create: (context)=>AnimateContainerCubit()),
     BlocProvider<UpdateTransactionCubit>(create: (context)=>UpdateTransactionCubit(editTransaction: getIt<EditTransaction>())),
     BlocProvider<RemoveTransactionCubit>(create: (context)=>RemoveTransactionCubit(removeTransaction: getIt<RemoveTransaction>())),
+    BlocProvider<GetReportCubit>(create: (context)=>GetReportCubit(getTransactionInMonth: getIt<GetTransactionInMonth>(), getTransactionTotalAmount: getIt<GetTransactionTotalAmount>())),
 
   ]
     ,child: BlocBuilder<ThemeCubit, ThemeState>(
@@ -67,9 +68,10 @@ class HomePage extends StatelessWidget {
       body: BlocBuilder<AppBarCubit,AppBarState>(
         builder: (context,state){
           if(state is AppBarAdd){
-            //BlocProvider.of<AddTransactionCubit>(context).clearAddPage(context);
+            BlocProvider.of<AddTransactionCubit>(context).clearAddPage(context);
             return const AddTransactionPage();
           }else if(state is AppBarReport){
+            BlocProvider.of<GetReportCubit>(context).switchTransactionState(true);
             return const TransactionsReports();
           }else if(state is AppBarSettings){
             return const SettingsPage();

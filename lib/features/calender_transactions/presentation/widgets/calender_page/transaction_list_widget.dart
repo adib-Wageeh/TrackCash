@@ -26,7 +26,7 @@ class TransactionsListWidget extends StatelessWidget {
                   BlocProvider.of<AnimateContainerCubit>(context).startDetails(index);
                 },
                 onLongPress: (){
-                  BlocProvider.of<AnimateContainerCubit>(context).startEditing(index);
+                  BlocProvider.of<AnimateContainerCubit>(context).startEditing(index,transactions[index],context);
                 },
                 borderRadius: BorderRadius.circular(36),
                 child: AnimatedContainer(

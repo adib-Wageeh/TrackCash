@@ -52,7 +52,7 @@ class TransactionRepositoryImplementation implements TransactionRepository{
   Future<Either<Failure, List<TransactionEntitie>>> getTransactionsInMonth(DateTime dateTime) async{
 
     try{
-      List<Map<String, dynamic>> result = await transactionDatasource.getTransactionsInDay(dateTime);
+      List<Map<String, dynamic>> result = await transactionDatasource.getTransactionsInMonth(dateTime);
       List<TransactionModel> transactions = result.map((e) {
         return TransactionModel.fromJson(e);
       }).toList();

@@ -21,16 +21,22 @@ class TransactionEditWidget extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       children: [
         TextFormWidget(
+          onValidate: (txt){
+            if(txt!.isEmpty){
+              return "please enter valid data";
+            }
+          },
           onSaved: (amount){
             BlocProvider.of<UpdateTransactionCubit>(context).amount = amount!;
           },labelText: "Amount",textInputType: TextInputType.number,textEditingController: TextEditingController(text: transactionEntitie.amount.toString()),)
         ,TextFormWidget(
+          onValidate: (txt){},
           onSaved: (desc){
             BlocProvider.of<UpdateTransactionCubit>(context).description = desc!;
           },
           labelText: "Description",textInputType: TextInputType.text,textEditingController: TextEditingController(text: transactionEntitie.description),)
-        ,const CalenderDatePickerWidget(),
-        Row(
+        // ,CalenderDatePickerWidget(state: transactionEntitie),
+        ,Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(onPressed: (){

@@ -22,11 +22,11 @@ class AddTransaction implements UseCase<bool,Params>{
 
 class Params extends Equatable{
 
-  TransactionType transactionType;
-  DateTime dateTime;
-  double amount;
-  String description;
-  Params({required this.transactionType,required this.dateTime,required this.amount,required this.description});
+  final TransactionType transactionType;
+  final DateTime dateTime;
+  final double amount;
+  final String description;
+  const Params({required this.transactionType,required this.dateTime,required this.amount,required this.description});
 
   @override
   List<Object?> get props => [transactionType,dateTime,amount];

@@ -22,8 +22,8 @@ class RemoveTransaction implements UseCase<bool,Params>{
 
 class Params extends Equatable{
 
-  TransactionEntitie transaction;
-  Params({required this.transaction});
+  final TransactionEntitie transaction;
+  const Params({required this.transaction});
 
   @override
   List<Object?> get props => [transaction];

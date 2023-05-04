@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:track_cash/features/calender_transactions/domain/usecases/get_transactions_in_month.dart';
+import 'package:track_cash/features/calender_transactions/domain/usecases/get_transactions_total_amount.dart';
 import 'package:track_cash/features/calender_transactions/domain/usecases/remove_transaction.dart';
 import '../features/calender_transactions/data/dataSources/local_data_source.dart';
 import '../features/calender_transactions/data/dataSources/transactions_datasource.dart';
@@ -21,5 +22,6 @@ void init(){
   getIt.registerSingleton(RemoveTransaction(transactionRepository: getIt()));
   getIt.registerSingleton(GetTransactionInDay(transactionRepository: getIt()));
   getIt.registerSingleton(GetTransactionInMonth(transactionRepository: getIt()));
+  getIt.registerSingleton<GetTransactionTotalAmount>(GetTransactionTotalAmount());
 
 }

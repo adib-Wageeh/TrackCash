@@ -22,7 +22,7 @@ class UpdateTransactionCubit extends Cubit<UpdateTransactionState> {
   void updateTransaction(TransactionEntitie transactionEntitie,BuildContext context)async{
 
    final result = await editTransaction.call(Params(transaction: transactionEntitie,description: description,
-      dateTime: BlocProvider.of<AddTransactionCubit>(context).selectedDate,amount: amount));
+      dateTime: BlocProvider.of<AddTransactionCubit>(context).selectedDate!,amount: amount));
 
    result.fold((l) => print(l), (r) {
      BlocProvider.of<GetTransactionsPerDayCubit>(context).getTransactionsPerDay(transactionEntitie.date);

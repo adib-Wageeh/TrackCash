@@ -9,10 +9,11 @@ class TableWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 32.0),
+      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.03),
       child: SizedBox(
-        height: 400,
+        height: 340,
         child: TableCalendar(
+          headerVisible: false,
           currentDay: BlocProvider.of<GetTransactionsPerDayCubit>(context).selectedDay,
           focusedDay: BlocProvider.of<GetTransactionsPerDayCubit>(context).selectedDay
           , firstDay: DateTime.utc(2000, 1, 1)

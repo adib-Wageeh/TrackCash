@@ -22,8 +22,8 @@ class GetTransactionInDay implements UseCase<List<TransactionEntitie>,Params>{
 
 class Params extends Equatable{
 
-  DateTime dateTime;
-  Params({required this.dateTime});
+  final DateTime dateTime;
+  const Params({required this.dateTime});
 
   @override
   List<Object?> get props => [dateTime];

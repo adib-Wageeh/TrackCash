@@ -18,7 +18,7 @@ class TransactionDetailsWidget extends StatelessWidget {
         ),
         Center(child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(transactionEntitie.description,overflow: TextOverflow.clip,),
+          child: Text(transactionEntitie.description,),
         ))
       ],
     );  }

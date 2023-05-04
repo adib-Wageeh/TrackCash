@@ -1,5 +1,10 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:track_cash/features/calender_transactions/domain/entities/transaction.dart';
+
+import '../add_transaction/add_transaction_cubit.dart';
 
 part 'animate_container_state.dart';
 
@@ -22,7 +27,7 @@ class AnimateContainerCubit extends Cubit<AnimateContainerState> {
     emit(AnimateContainerDetails());
   }
 
-  void startEditing(int index){
+  void startEditing(int index,TransactionEntitie transactionEntitie,BuildContext context){
     if(index == pressedIndex && isDetails != true){
       isEditing = false;
       pressedIndex = -1;
@@ -30,6 +35,7 @@ class AnimateContainerCubit extends Cubit<AnimateContainerState> {
       isEditing = true;
       isDetails = false;
       pressedIndex = index;
+      BlocProvider.of<AddTransactionCubit>(context).selectedDate = transactionEntitie.date;
     }
     emit(AnimateContainerEdit());
   }

@@ -16,6 +16,7 @@ class TransactionTypeButtonWidget extends StatelessWidget {
         onTap: (){
           BlocProvider.of<ChangeCategoryCubit>(context).onCategoryChange(newCategoryIndex: 0);
           BlocProvider.of<AddTransactionCubit>(context).switchTransactionType(type);
+
         },
         child:
         Material(

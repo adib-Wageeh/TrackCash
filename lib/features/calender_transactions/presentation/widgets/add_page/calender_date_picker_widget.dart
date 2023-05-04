@@ -5,7 +5,8 @@ import '../../../../../core/assets/assets.dart';
 import '../../cubit/add_transaction/add_transaction_cubit.dart';
 
 class CalenderDatePickerWidget extends StatelessWidget {
-  const CalenderDatePickerWidget({Key? key}) : super(key: key);
+  final state;
+  const CalenderDatePickerWidget({Key? key,required this.state}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class CalenderDatePickerWidget extends StatelessWidget {
               });
             },
             child: const Text("Select Date")),
-        Text("${BlocProvider.of<AddTransactionCubit>(context).selectedDate.day}/${BlocProvider.of<AddTransactionCubit>(context).selectedDate.month}/${BlocProvider.of<AddTransactionCubit>(context).selectedDate.year}")
+        Text("${BlocProvider.of<AddTransactionCubit>(context).selectedDate?.day ?? DateTime.now().day}/${BlocProvider.of<AddTransactionCubit>(context).selectedDate?.month??DateTime.now().month}/${BlocProvider.of<AddTransactionCubit>(context).selectedDate?.year??DateTime.now().year}")
       ],
     );
   }

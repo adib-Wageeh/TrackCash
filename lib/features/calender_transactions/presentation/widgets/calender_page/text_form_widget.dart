@@ -9,7 +9,8 @@ class TextFormWidget extends StatelessWidget {
   final TextInputType textInputType;
   final TextEditingController textEditingController;
   final Function(String?)? onSaved;
-  const TextFormWidget({required this.onSaved,Key? key,required this.textEditingController,required this.labelText,required this.textInputType}) : super(key: key);
+  final String? Function(String?)? onValidate;
+  const TextFormWidget({this.onValidate,required this.onSaved,Key? key,required this.textEditingController,required this.labelText,required this.textInputType}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +18,7 @@ class TextFormWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: TextFormField(
-        validator: (txt){
-          if(txt!.isEmpty){
-            return "please enter valid data";
-          }
-        },
+        validator: onValidate,
         onSaved: onSaved,
         keyboardType: textInputType,
         decoration: InputDecoration(

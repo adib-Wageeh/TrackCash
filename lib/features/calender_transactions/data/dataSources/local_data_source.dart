@@ -84,7 +84,7 @@ void _onCreate(Database db,int version)async{
   Future<List<Map<String,dynamic>>> getTransactionsInMonth(DateTime dateTime) async{
     Database dbRef = await db;
     List<Map<String,dynamic>> result = await dbRef.rawQuery('''
-    SELECT * FROM transactions WHERE 'year'= ${dateTime.year} AND 'month'= ${dateTime.month}    
+    SELECT * FROM transactions WHERE year= "${dateTime.year}" AND month= "${dateTime.month}"
        ''');
     return result;
   }

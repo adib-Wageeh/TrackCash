@@ -26,6 +26,7 @@ class TransactionEntitie extends Equatable{
     description
   ];
 
+
 }
 
 

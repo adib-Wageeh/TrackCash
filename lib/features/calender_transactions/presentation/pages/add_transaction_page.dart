@@ -58,18 +58,14 @@ class AddTransactionPage extends StatelessWidget {
                 textEditingController: TextEditingController(text: BlocProvider.of<AddTransactionCubit>(context).getAmount()),
                 textInputType: TextInputType.number,
               ),
-              const CalenderDatePickerWidget(),
+              CalenderDatePickerWidget(state:state),
               CategoriesGridViewWidget(data: state.list,images: state.images,),
               AmountInputContainer(
                 labelText: "Description",
                 onChanged: (val){
                     BlocProvider.of<AddTransactionCubit>(context).setDescription(val);
                 },
-                validator: (txt){
-                  if(txt==""){
-                    return "Please enter valid Description";
-                  }
-                },
+                validator: (txt){},
                 onSavedFunc: (txt){
                   BlocProvider.of<AddTransactionCubit>(context).setDescription(txt);
                 },
@@ -103,7 +99,7 @@ class AddTransactionPage extends StatelessWidget {
                 textEditingController: TextEditingController(text: BlocProvider.of<AddTransactionCubit>(context).getAmount()),
                 textInputType: TextInputType.number,
               ),
-              const CalenderDatePickerWidget(),
+              CalenderDatePickerWidget(state: state),
               CategoriesGridViewWidget(data: state.list,images: state.images,),
               AmountInputContainer(
                 labelText: "Description",
@@ -111,9 +107,7 @@ class AddTransactionPage extends StatelessWidget {
                     BlocProvider.of<AddTransactionCubit>(context).setDescription(val);
                 },
                 validator: (txt){
-                  if(txt==""){
-                    return "Please enter valid Description";
-                  }
+                  if(txt==""){}
                 },
                 onSavedFunc: (txt){
                   BlocProvider.of<AddTransactionCubit>(context).setDescription(txt);
