@@ -18,7 +18,7 @@ class _CalendarPageState extends State<CalendarPage> {
     return Scaffold(
     appBar: AppBar(backgroundColor: Assets.mainColor,title: Text("TrackCash",style:
     GoogleFonts.vollkorn().copyWith(fontSize: 26,fontWeight: FontWeight.w700)
-    ),actions: [])
+    ))
     ,body: BlocConsumer<GetTransactionsPerDayCubit,GetTransactionsPerDayState>(
           listener: (context,state){
             if(state is GetTransactionsPerDayError){
@@ -30,15 +30,15 @@ class _CalendarPageState extends State<CalendarPage> {
         if(state is GetTransactionsPerDayLoaded){
           if(state.transactions.isEmpty){
             return Column(
-              children: const [
-                TableWidget(),
-                EmptyDayWidget()
+              children: [
+                TableWidget(selectedDay: state.selectedDay),
+                const EmptyDayWidget()
               ],
             );
           }else{
             return Column(
               children: [
-                const TableWidget(),
+                TableWidget(selectedDay: state.selectedDay),
                 TransactionsListWidget(transactions: state.transactions,)
               ],
             );
@@ -46,8 +46,8 @@ class _CalendarPageState extends State<CalendarPage> {
         }
         else if(state is GetTransactionsPerDayLoading){
           return Column(
-            children: const [
-              TableWidget(),
+            children: [
+              TableWidget(selectedDay: state.selectedDay),
             ],
           );
         }

@@ -22,7 +22,7 @@ class ToggleButtonWidget extends StatelessWidget {
       iconOff: Icons.dark_mode_rounded,
       animationDuration: const Duration(milliseconds: 300),
       onChanged: (bool state) {
-        BlocProvider.of<ThemeCubit>(context).toggleTheme(state);
+        BlocProvider.of<ThemeCubit>(context).saveTheme(state);
       },
       onDoubleTap: () {},
       onSwipe: () {},

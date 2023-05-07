@@ -10,6 +10,7 @@ import 'package:track_cash/features/calender_transactions/presentation/cubit/add
 import 'package:track_cash/features/calender_transactions/presentation/cubit/change_category/change_category_cubit.dart';
 import 'package:track_cash/features/calender_transactions/presentation/cubit/remove_transaction/remove_transaction_cubit.dart';
 import 'package:track_cash/features/calender_transactions/presentation/cubit/report_cubit/get_report_cubit.dart';
+import 'core/assets/assets.dart';
 import 'features/calender_transactions/domain/usecases/get_transaction_in_day.dart';
 import 'features/calender_transactions/domain/usecases/get_transactions_total_amount.dart';
 import 'features/calender_transactions/domain/usecases/remove_transaction.dart';
@@ -20,6 +21,7 @@ import 'features/calender_transactions/presentation/cubit/update_transaction/upd
 import 'features/calender_transactions/presentation/pages/add_transaction_page.dart';
 import 'features/calender_transactions/presentation/pages/calender_page.dart';
 import 'features/calender_transactions/presentation/pages/reports.dart';
+import 'features/settings/domain/use_case/theme_use_case.dart';
 import 'features/settings/presentation/cubit/theme_changer/theme_cubit.dart';
 import 'features/settings/presentation/pages/settings_page.dart';
 
@@ -35,14 +37,13 @@ void main() {
   runApp(MultiBlocProvider(providers: [
     BlocProvider<GetTransactionsPerDayCubit>(create: (context)=>GetTransactionsPerDayCubit(getTransactionInDay: getIt<GetTransactionInDay>())),
     BlocProvider<AppBarCubit>(create: (context)=>AppBarCubit()),
-    BlocProvider<ThemeCubit>(create: (context)=>ThemeCubit()..toggleTheme(true)),
+    BlocProvider<ThemeCubit>(create: (context)=>ThemeCubit(themeUseCase: getIt<ThemeUseCase>())..getTheme()),
     BlocProvider<AddTransactionCubit>(create: (context)=>AddTransactionCubit(addTransaction: getIt<AddTransaction>())..switchTransactionType(true)),
     BlocProvider<ChangeCategoryCubit>(create: (context)=>ChangeCategoryCubit()..onCategoryChange(newCategoryIndex: 0)),
     BlocProvider<AnimateContainerCubit>(create: (context)=>AnimateContainerCubit()),
     BlocProvider<UpdateTransactionCubit>(create: (context)=>UpdateTransactionCubit(editTransaction: getIt<EditTransaction>())),
     BlocProvider<RemoveTransactionCubit>(create: (context)=>RemoveTransactionCubit(removeTransaction: getIt<RemoveTransaction>())),
     BlocProvider<GetReportCubit>(create: (context)=>GetReportCubit(getTransactionInMonth: getIt<GetTransactionInMonth>(), getTransactionTotalAmount: getIt<GetTransactionTotalAmount>())),
-
   ]
     ,child: BlocBuilder<ThemeCubit, ThemeState>(
   builder: (context, state) {
@@ -79,13 +80,12 @@ class HomePage extends StatelessWidget {
           BlocProvider.of<GetTransactionsPerDayCubit>(context).getTransactionsPerDay(BlocProvider.of<GetTransactionsPerDayCubit>(context).selectedDay);
           return const CalendarPage();
         },
-      )
-        ,
+      ),
         bottomNavigationBar: ConvexAppBar(
           height: 55,
           top: -20,
           elevation: 5,
-          backgroundColor: const Color(0xff691515),
+          backgroundColor: Assets.mainColor,
           items: const [
             TabItem(icon: Icons.calendar_month_rounded, title: 'Calender'),
             TabItem(icon: Icons.add, title: 'Add'),

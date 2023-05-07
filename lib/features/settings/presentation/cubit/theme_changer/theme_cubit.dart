@@ -3,22 +3,29 @@ import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../../core/global/theme/app_themes.dart';
+import '../../../domain/use_case/theme_use_case.dart';
 
 part 'theme_state.dart';
 
 class ThemeCubit extends Cubit<ThemeState> {
-  ThemeCubit() : super(ThemeInitial());
-
+  ThemeCubit({required this.themeUseCase}) : super(ThemeInitial());
+  ThemeUseCase themeUseCase;
 
   bool toggleVal = true;
-  void toggleTheme(bool themeState){
+  void getTheme()async{
 
-    toggleVal = themeState;
-    if(themeState == true){
+    toggleVal = await themeUseCase.getThemeType();
+    if(toggleVal == true){
       emit(setTheme(themeData: appThemeData[AppThemes.Light]!));
     }else{
       emit(setTheme(themeData: appThemeData[AppThemes.Dark]!));
     }
+  }
+
+  void saveTheme(bool type)async{
+
+    await themeUseCase.setThemeType(type);
+    getTheme();
   }
 
 }

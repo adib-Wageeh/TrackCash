@@ -14,9 +14,9 @@ class PieChartViewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 300,
+      height: MediaQuery.of(context).size.height*0.38,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.20),
+        padding: const EdgeInsets.all(20.0),
         child: PieChart(
           PieChartData(
             sections:

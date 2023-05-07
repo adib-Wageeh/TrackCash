@@ -11,27 +11,30 @@ class AddTransactionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.topCenter,
-      child: ScaleButton(
-        onTap: (){
-          if(keyAmount.currentState!.validate()) {
-            keyAmount.currentState!.save();
-            BlocProvider.of<AddTransactionCubit>(context).addTransactionMethod(
-                context);
+      child: Padding(
+        padding: const EdgeInsets.only(top: 10.0),
+        child: ScaleButton(
+          onTap: (){
+            if(keyAmount.currentState!.validate()) {
+              keyAmount.currentState!.save();
+              BlocProvider.of<AddTransactionCubit>(context).addTransactionMethod(
+                  context);
+            }
           }
-        }
-        ,child: Container(
-        height: 48.0,
-        width: 300.0,
-        alignment: Alignment.center,
-        decoration: const BoxDecoration(
-          color: Assets.mainColor,
-          borderRadius: BorderRadius.all(Radius.circular(24.0)),
-        ),
-        child: const Text(
-          "Save",
-          style: TextStyle(color: Colors.white,fontSize: 16),
-        ),
-      ),),
+          ,child: Container(
+          height: 48.0,
+          width: 300.0,
+          alignment: Alignment.center,
+          decoration: const BoxDecoration(
+            color: Assets.mainColor,
+            borderRadius: BorderRadius.all(Radius.circular(24.0)),
+          ),
+          child: const Text(
+            "Save",
+            style: TextStyle(color: Colors.white,fontSize: 16),
+          ),
+        ),),
+      ),
     );
   }
 }

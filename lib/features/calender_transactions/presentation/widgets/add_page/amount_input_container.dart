@@ -21,37 +21,33 @@ class AmountInputContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = BlocProvider.of<ThemeCubit>(context).toggleVal;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 24.0),
-      child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: TextFormField(
-              controller: textEditingController,
-              validator: validator,
-              onChanged: onChanged,
-              onSaved: onSavedFunc,
-              decoration: InputDecoration(
-                  labelText: labelText,
-                  labelStyle: TextStyle(color: (theme)?Assets.mainColor:Colors.white),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(borderRadius),borderSide: BorderSide(color: (theme)?Assets.mainColor:Colors.white)
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(borderRadius),borderSide: BorderSide(color: (theme)?Assets.mainColor:Colors.white)
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(borderRadius),borderSide: BorderSide(color: (theme)?Assets.mainColor:Colors.white)
-                  ),
-                  errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(borderRadius),borderSide: const BorderSide(color: Colors.red)
-                  ),
-                  floatingLabelAlignment: FloatingLabelAlignment.center
-              ),
-              keyboardType: textInputType,
-              minLines: minLines,
-              maxLines: 5,
+      padding: const EdgeInsets.only(left: 20.0,right: 20,top: 12),
+      child: TextFormField(
+        controller: textEditingController,
+        validator: validator,
+        onChanged: onChanged,
+        onSaved: onSavedFunc,
+
+        decoration: InputDecoration(
+            labelText: labelText,
+            labelStyle: TextStyle(color: (theme)?Assets.mainColor:Colors.white),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(borderRadius),borderSide: BorderSide(color: (theme)?Assets.mainColor:Colors.white)
             ),
-          )
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(borderRadius),borderSide: BorderSide(color: (theme)?Assets.mainColor:Colors.white)
+            ),
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(borderRadius),borderSide: BorderSide(color: (theme)?Assets.mainColor:Colors.white)
+            ),
+            errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(borderRadius),borderSide: const BorderSide(color: Colors.red)
+            ),
+            floatingLabelAlignment: FloatingLabelAlignment.center
+        ),
+        keyboardType: textInputType,
+        minLines: minLines,
+        maxLines: 4,
       ),
     );
   }

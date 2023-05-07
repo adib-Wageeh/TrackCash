@@ -19,6 +19,7 @@ class CalenderDatePickerWidget extends StatelessWidget {
                await showCalendarDatePicker2Dialog(
                 context: context,
                 config: CalendarDatePicker2WithActionButtonsConfig(
+                  buttonPadding: EdgeInsets.zero,
                     selectedDayTextStyle: const TextStyle(color:Assets.mainColor)),
                 dialogSize: const Size(325, 400),
                 value: [DateTime.now()],

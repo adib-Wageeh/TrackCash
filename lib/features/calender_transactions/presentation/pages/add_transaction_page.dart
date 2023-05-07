@@ -48,7 +48,7 @@ class AddTransactionPage extends StatelessWidget {
                     }
                 },
                 validator: (txt){
-                  if(txt=="" || double.parse(txt!) <= 0){
+                  if(double.parse(txt!).runtimeType != double || txt=="" || double.parse(txt) <= 0){
                     return "Please enter valid amount";
                   }
                 },
@@ -71,7 +71,7 @@ class AddTransactionPage extends StatelessWidget {
                 },
                 textEditingController: TextEditingController(text: BlocProvider.of<AddTransactionCubit>(context).getDescription()),
                 textInputType: TextInputType.text,
-                minLines: 4,
+                minLines: 3,
               ),
               const AddTransactionButton()
             ],
@@ -89,7 +89,7 @@ class AddTransactionPage extends StatelessWidget {
                   }
                 },
                 validator: (txt){
-                  if(txt=="" || double.parse(txt!) <= 0){
+                  if(double.parse(txt!).runtimeType != double || txt=="" || double.parse(txt) <= 0){
                     return "Please enter valid amount";
                   }
                 },
@@ -114,7 +114,7 @@ class AddTransactionPage extends StatelessWidget {
                 },
                 textEditingController: TextEditingController(text: BlocProvider.of<AddTransactionCubit>(context).getDescription()),
                 textInputType: TextInputType.text,
-                minLines: 4,
+                minLines: 3,
               ),
               const AddTransactionButton()
             ],

@@ -71,6 +71,9 @@ class TotalTransactionTextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text("Total $currState = ${totalSpent.toString()}");
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Text("Total $currState = ${totalSpent.toString()}"),
+    );
   }
 }

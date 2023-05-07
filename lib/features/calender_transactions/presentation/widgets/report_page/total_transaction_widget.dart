@@ -10,12 +10,13 @@ class TotalTransactionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.separated(
+        padding: EdgeInsets.zero,
           physics: const BouncingScrollPhysics()
           ,itemBuilder: (context,index){
         return Row(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Container(
                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(36)),
                   child: Image.asset(transactions[index].imagePath,color: transactions[index].color,

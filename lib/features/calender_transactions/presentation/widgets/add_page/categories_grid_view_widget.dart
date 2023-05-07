@@ -15,19 +15,20 @@ class CategoriesGridViewWidget extends StatelessWidget {
       builder: (context, state) {
         if(state is ChangeCategoryLoaded) {
           return SizedBox(
-          height: 240
+          height: 200
           ,child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Padding(
-                  padding: EdgeInsets.only(left: 16.0, top: 12, bottom: 8),
+                  padding: EdgeInsets.only(left: 16.0,bottom: 8),
                   child: Text("Categories",style: TextStyle(fontSize: 16)),
                 ),
                 Expanded(
                   child: GridView(
                     physics: const NeverScrollableScrollPhysics(),
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 4), padding: EdgeInsets.zero,
+                        crossAxisCount: 4,
+                        childAspectRatio: 1.15), padding: EdgeInsets.zero,
                     children: List.generate(data.length, (index) =>
                         CategoryWidget(index: index,selectedIndex: state.categoryIndex,imageWithColor: images, text: data[index]))
                     ,

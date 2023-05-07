@@ -9,6 +9,7 @@ import '../features/calender_transactions/domain/repository/transaction_reposito
 import '../features/calender_transactions/domain/usecases/add_transaction.dart';
 import '../features/calender_transactions/domain/usecases/edit_transaction.dart';
 import '../features/calender_transactions/domain/usecases/get_transaction_in_day.dart';
+import '../features/settings/domain/use_case/theme_use_case.dart';
 
 final getIt = GetIt.instance;
 
@@ -23,5 +24,6 @@ void init(){
   getIt.registerSingleton(GetTransactionInDay(transactionRepository: getIt()));
   getIt.registerSingleton(GetTransactionInMonth(transactionRepository: getIt()));
   getIt.registerSingleton<GetTransactionTotalAmount>(GetTransactionTotalAmount());
+  getIt.registerSingleton<ThemeUseCase>(ThemeUseCase());
 
 }

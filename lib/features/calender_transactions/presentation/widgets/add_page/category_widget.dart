@@ -20,15 +20,16 @@ class CategoryWidget extends StatelessWidget {
       }
       ,child: Column(
       children: [
-        Container(
-          height: 70.0,
-          width: 70.0,
-          decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: (selectedIndex == index)? imageWithColor.values.elementAt(index) : const Color(0xffa4b7b1)
-          ),
-          child: Padding(padding: const EdgeInsets.all(10),
-            child: Image.asset(imageWithColor.keys.elementAt(index),color: Colors.white),
+        AspectRatio(
+      aspectRatio: 1.5
+      ,child: Container(
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: (selectedIndex == index)? imageWithColor.values.elementAt(index) : const Color(0xffa4b7b1)
+            ),
+            child: Padding(padding: const EdgeInsets.all(10),
+              child: Image.asset(imageWithColor.keys.elementAt(index),color: Colors.white),
+            ),
           ),
         ),
 
