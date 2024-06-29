@@ -1,18 +1,18 @@
 import 'package:dartz/dartz.dart';
-import 'package:get_it/get_it.dart';
 import 'package:track_cash/core/data/local/transactions_datasource.dart';
 import 'package:track_cash/core/data/model/transaction_model.dart';
 import 'package:track_cash/core/error/Failure.dart';
 import 'package:track_cash/core/data/model/transaction.dart';
+import 'package:track_cash/core/injection_container.dart';
 import 'package:track_cash/ui/screens/report/repository/report_repository.dart';
 
 class ReportRepositoryImplementation extends ReportRepository {
   late final TransactionDatasource transactionDatasource;
 
-  CalendarRepositoryImplementation(
+  ReportRepositoryImplementation(
       {TransactionDatasource? transactionDatasource}) {
-    transactionDatasource =
-        transactionDatasource ?? GetIt.I.get<TransactionDatasource>();
+    this.transactionDatasource =
+        transactionDatasource ?? getIt.get<TransactionDatasource>();
   }
 
   @override

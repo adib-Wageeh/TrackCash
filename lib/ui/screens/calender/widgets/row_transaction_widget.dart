@@ -6,7 +6,9 @@ class RowTransactionWidget extends StatelessWidget {
     super.key,
     required this.transactionEntity,
   });
+
   final TransactionEntity transactionEntity;
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -14,19 +16,28 @@ class RowTransactionWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(36)),
-              child: Image.asset(transactionEntity.type.imagePath,color: transactionEntity.type.color,
-                height: 55,width: 55,
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(36)),
+              child: Image.asset(
+                transactionEntity.type.imagePath,
+                color: transactionEntity.type.color,
+                height: 30,
+                width: 30,
               )),
         ),
-        Text(transactionEntity.type.category,style: TextStyle(color: transactionEntity.type.color)),
+        Text(transactionEntity.type.category,
+            style: TextStyle(color: transactionEntity.type.color)),
         const Spacer(),
-        Text("${(transactionEntity.type.type == 1)?"+":"-"} ${transactionEntity.amount.toString()}",
+        Text(
+          "${(transactionEntity.type.type == 1) ? "+" : "-"} ${transactionEntity.amount.toString()}",
           style: TextStyle(
-              color: (transactionEntity.type.type == 1)? Colors.green:Colors.red
-          ),
+              color: (transactionEntity.type.type == 1)
+                  ? Colors.green
+                  : Colors.red),
         ),
-        const SizedBox(width: 15,)
+        const SizedBox(
+          width: 12,
+        )
       ],
     );
   }

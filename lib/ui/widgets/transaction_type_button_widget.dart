@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:track_cash/core/res/colors.dart';
 
 class TransactionTypeButtonWidget extends StatelessWidget {
   final String text;
@@ -12,7 +13,7 @@ class TransactionTypeButtonWidget extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.070),
       child: InkWell(
-        onTap: ()=>onPressed,
+        onTap: ()=>onPressed(),
         child:
         Material(
           color: Colors.transparent,
@@ -20,10 +21,10 @@ class TransactionTypeButtonWidget extends StatelessWidget {
             children: [
               Text(text,style: TextStyle(
                   fontSize: 22
-                  ,color: (isSelected)?Colors.white:Colors.white.withOpacity(0.5))),
+                  ,color: (isSelected)?AppColors.primaryColor:Colors.white.withOpacity(0.5))),
               const SizedBox(height: 5,),
               (isSelected)?
-              Container(height: 2.5,color: Colors.white,width: 100,):Container()
+              Container(height: 2.5,color: AppColors.primaryColor,width: 100,):Container()
             ],
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:track_cash/core/res/colors.dart';
 import 'package:track_cash/ui/widgets/transaction_type_button_widget.dart';
 import '../../../core/assets/assets.dart';
 
@@ -11,8 +12,8 @@ class TransactionTypeSelectorContainerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height*0.140,
-      decoration: const BoxDecoration(
-          color: Assets.mainColor,
+      decoration: BoxDecoration(
+          color: AppColors.secondaryColor,
           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(46),bottomRight: Radius.circular(46))
       ),
       child: Row(
@@ -23,7 +24,7 @@ class TransactionTypeSelectorContainerWidget extends StatelessWidget {
                 ,text: "INCOME",isSelected: isIncome,),
                 TransactionTypeButtonWidget(
                   onPressed: ()=>onPressed(2),
-                  text: "EXPENSE",isSelected: isIncome,)
+                  text: "EXPENSE",isSelected: !isIncome,)
               ],
             )
     );

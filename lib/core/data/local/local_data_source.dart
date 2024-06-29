@@ -13,10 +13,10 @@ class LocalDataSource implements TransactionDatasource {
       DateTime dateTime, String description) async {
     Database dbRef = await db;
     int result = await dbRef.rawInsert('''
-    INSERT INTO transactions(category,type,day,month,year,amount,description) VALUES 
+    INSERT INTO transactions(category,type,day,month,year,amount,description,transactionTypeId) VALUES 
     ("${transactionType.category}","${transactionType.type}",
     "${dateTime.day}","${dateTime.month}","${dateTime.year}",${amount.toString()},
-    "${description.toString()}"
+    "${description.toString()}","${transactionType.id}"
     )
     ''');
     return result;

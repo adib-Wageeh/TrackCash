@@ -6,4 +6,15 @@ class TransactionTypeTotal{
   TransactionEntity transactionEntity;
 
   TransactionTypeTotal({required this.transactionEntity,required this.amount});
+
+
+  TransactionTypeTotal copyWith({
+      double? amount,
+      TransactionEntity? transactionEntity}) {
+    return TransactionTypeTotal(
+        amount: amount ?? this.amount,
+        transactionEntity: transactionEntity ?? this.transactionEntity);
+
+  }
+
 }

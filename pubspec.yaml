@@ -14,12 +14,13 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   equatable: ^2.0.5
+  easy_localization: ^3.0.7
   get_it: ^7.3.0
-  flutter_easyloading: ^3.0.5
   dartz: ^0.10.1
   mockito: ^5.4.0
   gsheets: ^0.5.0
   sqflite: ^2.2.8
+  provider: ^6.1.2
   path: ^1.8.2
   bloc: ^8.1.1
   flutter_bloc: ^8.1.2
@@ -28,8 +29,7 @@ dependencies:
   lite_rolling_switch: ^1.0.1
   calendar_date_picker2: ^1.1.4
   scale_button: ^2.1.2
-  fl_chart: ^0.68.0
-  google_fonts: ^6.2.1
+  fl_chart: ^0.63.0
   shared_preferences: ^2.1.0
   freezed: ^2.4.7
   freezed_annotation: ^2.4.1
@@ -70,7 +70,7 @@ flutter:
       - assets/income/give-money.png
       - assets/income/money.png
       - assets/income/signing.png
-
+      - assets/translations/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -1,0 +1,11 @@
+{
+  "app_name": "TrackCash",
+
+  "calendar": "Calendar",
+  "add": "Add",
+  "report": "Report",
+  "settings": "Settings",
+  "no_transactions": "No Transactions Added Yet",
+  "change_language": "Change Language"
+
+}

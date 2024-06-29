@@ -35,7 +35,10 @@ class _ReportScreenState extends State<ReportScreen> {
   Widget build(BuildContext context) {
     return BlocProvider<ReportCubit>(
       lazy: false,
-      create: (_) => ReportCubit(),
+      create: (_) => ReportCubit()..getTransactionsInMonth(
+          date: selectedDate,
+          type: isIncome? 1 : 2
+      ),
       child: BlocConsumer<ReportCubit, ReportState>(
         listener: _onStateChangeListener,
         builder: (context, state) {
@@ -52,6 +55,10 @@ class _ReportScreenState extends State<ReportScreen> {
                       setState(() {
                         isIncome = !isIncome;
                       });
+                      cubit.getTransactionsInMonth(
+                        type: isIncome? 1 : 2,
+                        date: selectedDate,
+                      );
                     }
                   },
                 ),
@@ -64,6 +71,10 @@ class _ReportScreenState extends State<ReportScreen> {
                       int newMonth = (selectedDate.month + 1 - 1) % 12 + 1;
                       selectedDate = DateTime(newYear, newMonth);
                     });
+                    cubit.getTransactionsInMonth(
+                      type: isIncome? 1 : 2,
+                      date: selectedDate,
+                    );
                   },
                   onPreviewsPressed: () {
                     setState(() {
@@ -75,9 +86,13 @@ class _ReportScreenState extends State<ReportScreen> {
                       }
                       selectedDate = DateTime(newYear, newMonth);
                     });
+                    cubit.getTransactionsInMonth(
+                      type: isIncome? 1 : 2,
+                      date: selectedDate,
+                    );
                   },
                 ),
-                if (cubit.transactionTypesTotal != null) ...[
+                if (cubit.transactionTypesTotal!.isNotEmpty) ...[
                   PieChartViewWidget(
                       transactions: cubit.transactionTypesTotal!),
                   TotalTransactionTextWidget(
@@ -86,7 +101,7 @@ class _ReportScreenState extends State<ReportScreen> {
                     transactions: cubit.transactionTypesTotal!,
                   )
                 ],
-                if(cubit.transactionTypesTotal == null)
+                if(cubit.transactionTypesTotal!.isEmpty)
                   const EmptyDayWidget(),
               ],
             );

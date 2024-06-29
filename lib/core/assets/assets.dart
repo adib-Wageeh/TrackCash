@@ -4,8 +4,6 @@ class Assets{
 
   static const emptyDayIcon = "assets/box.png";
   static const emptyDayIconWhite = "assets/boxWhite.png";
-  static const mainColor = Color(0xff691515);
-
 
   static const Map<String,Color> incomeImages = {
     'assets/income/money.png': Color(0xff4ea0ee),

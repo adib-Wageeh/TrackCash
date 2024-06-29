@@ -20,6 +20,9 @@ class AppColors {
     Color(0xFFDE535C),
   ]);
 
+  static Color primaryColor = const Color(0xFFF1FAEE);
+  static Color secondaryColor = const Color(0xFF1D3557);
+
   /// neutral Colors
   static AppColor neutralColors = const AppColor(colors: [
     Color(0xFFffffff),

@@ -1,46 +1,34 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:provider/provider.dart';
+import 'package:track_cash/core/constants.dart';
 import 'package:track_cash/core/injection_container.dart';
+import 'package:track_cash/core/res/colors.dart';
 import 'package:track_cash/ui/screens/add_transaction/screen/add_transaction_screen.dart';
 import 'package:track_cash/ui/screens/report/screen/report_screen.dart';
-import 'package:track_cash/ui/screens/settings/domain/use_case/theme_use_case.dart';
-import 'package:track_cash/ui/screens/settings/presentation/cubit/theme_changer/theme_cubit.dart';
 import 'package:track_cash/ui/screens/settings/presentation/pages/settings_page.dart';
-import 'core/assets/assets.dart';
+import 'package:track_cash/ui/screens/settings/presentation/provider/locale_provider.dart';
 import 'ui/screens/calender/screen/calendar_screen.dart';
 
-void main() async{
-
-  await WidgetsFlutterBinding.ensureInitialized();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await init();
-  EasyLoading.instance
-    ..backgroundColor = Colors.white
-    ..indicatorColor = Colors.deepPurpleAccent
-    ..maskColor = Colors.deepPurpleAccent
-    ..userInteractions = false;
+  await Future.delayed(Duration(seconds: 1));
 
-
-  runApp(MultiBlocProvider(
-    providers: [
-      BlocProvider<ThemeCubit>(
-          create: (context) =>
-              ThemeCubit(themeUseCase: getIt<ThemeUseCase>())..getTheme()),
+  runApp(EasyLocalization(
+    supportedLocales: const [
+      Locale(TranslationsConstants.localeEN),
+      Locale(TranslationsConstants.localeAr),
     ],
-    child: BlocBuilder<ThemeCubit, ThemeState>(
-      builder: (context, state) {
-        if (state is setTheme) {
-          return MaterialApp(
-            home: const HomePage(),
-            theme: state.themeData,
-            debugShowCheckedModeBanner: false,
-            builder: EasyLoading.init(),
-          );
-        }
-        return Container();
-      },
-    ),
+    path: 'assets/translations',
+    startLocale: const Locale(TranslationsConstants.localeEN),
+    fallbackLocale: const Locale(TranslationsConstants.localeEN),
+    useOnlyLangCode: true,
+    child: ChangeNotifierProvider<LocaleProvider>(
+    create: (context) => LocaleProvider()
+    ,child: HomePage()),
   ));
 }
 
@@ -52,7 +40,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   int currentIndex = 0;
   late PageController _pageController;
 
@@ -78,34 +65,49 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: PageView(
-        controller: _pageController,
-        onPageChanged: (index) {
-          setState(() {
-            currentIndex = index;
-          });
-        },
-        children: const [
-          CalendarScreen(),
-          AddTransactionScreen(),
-          ReportScreen(),
-          SettingsScreen(),
-        ],
-      ),
-      bottomNavigationBar: ConvexAppBar(
-          height: 55,
-          top: -20,
-          initialActiveIndex: currentIndex,
-          elevation: 5,
-          backgroundColor: Assets.mainColor,
-          items: const [
-            TabItem(icon: Icons.calendar_month_rounded, title: 'Calender'),
-            TabItem(icon: Icons.add, title: 'Add'),
-            TabItem(icon: Icons.query_stats_rounded, title: 'Report'),
-            TabItem(icon: Icons.settings, title: 'Settings'),
-          ],
-          onTap: onTabTapped),
-    );
-  }
+    return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              localizationsDelegates: context.localizationDelegates,
+              supportedLocales: context.supportedLocales,
+              locale: context.locale,
+              home: Consumer<LocaleProvider>(
+                builder: (context, _,__) {
+                  print('update');
+                  return Scaffold(
+                    body: PageView(
+                      controller: _pageController,
+                      physics: NeverScrollableScrollPhysics(),
+                      onPageChanged: (index) {
+                        setState(() {
+                          currentIndex = index;
+                        });
+                      },
+                      children: const [
+                        CalendarScreen(),
+                        AddTransactionScreen(),
+                        ReportScreen(),
+                        SettingsScreen(),
+                      ],
+                    ),
+                    bottomNavigationBar: ConvexAppBar(
+                        height: 55,
+                        top: -20,
+                        initialActiveIndex: currentIndex,
+                        elevation: 5,
+                        color: AppColors.primaryColor,
+                        backgroundColor: AppColors.secondaryColor,
+                        items: [
+                          TabItem(icon: Icons.calendar_month_rounded, title: 'calendar'.tr()),
+                          TabItem(icon: Icons.add, title: 'add'.tr()),
+                          TabItem(icon: Icons.query_stats_rounded, title: 'report'.tr()),
+                          TabItem(icon: Icons.settings, title: 'settings'.tr()),
+                        ],
+                        onTap: onTabTapped),
+                  );
+                }
+              ),
+            );
+      }
 }
+
+

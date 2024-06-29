@@ -17,6 +17,7 @@ class CalenderDatePickerWidget extends StatelessWidget {
             onPressed: ()async{
                await showDatePicker(
                 context: context,
+                initialDate: DateTime.now(),
                 currentDate: DateTime.now(),
                 firstDate: DateTime(2000),
                 lastDate: DateTime(2050),

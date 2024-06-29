@@ -1,13 +1,14 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:track_cash/core/assets/assets.dart';
+import 'package:track_cash/core/res/colors.dart';
 import 'package:track_cash/core/utils/common_functions.dart';
 import 'package:track_cash/ui/screens/calender/cubit/calendar_cubit.dart';
 import 'package:track_cash/ui/screens/calender/cubit/calendar_state.dart';
 import '../../../widgets/empty_day_widget.dart';
 import '../widgets/table_widget.dart';
 import '../widgets/transaction_list_widget.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({Key? key}) : super(key: key);
@@ -36,10 +37,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
       create: (_) => CalendarCubit()..getTransactions(selectedDay),
       child: Scaffold(
         appBar: AppBar(
-            backgroundColor: Assets.mainColor,
-            title: Text("TrackCash",
-                style: GoogleFonts.vollkorn()
-                    .copyWith(fontSize: 26, fontWeight: FontWeight.w700))),
+            backgroundColor: AppColors.secondaryColor,
+            title: Text("app_name".tr(),
+                style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700))),
         body: BlocConsumer<CalendarCubit, CalendarState>(
             listener: _onStateChangeListener,
             builder: (context, state) {

@@ -14,14 +14,13 @@ class TransactionsListWidget extends StatelessWidget {
           physics: const BouncingScrollPhysics()
           ,itemBuilder: (context,index){
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 36.0),
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: InkWell(
                 onTap: (){},
                 onLongPress: (){},
                 borderRadius: BorderRadius.circular(36),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 500),
-                  height: 80,
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12),
                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(36),
                       border: Border.all(color: Colors.black,width: 0.5)
                   )
