@@ -6,6 +6,34 @@
   "report": "Report",
   "settings": "Settings",
   "no_transactions": "No Transactions Added Yet",
+  "transaction_added": "Transaction Added Successfully",
+  "amount": "Amount",
+  "amount_required": "Amount is required",
+  "amount_error": "Enter a valid amount",
+  "notes": "Notes",
+  "save": "Save",
+  "income": "Income",
+  "expense": "Expense",
+  "select_date": "Pick a date",
+  "categories": "Categories",
+  "salary": "Salary",
+  "bonus": "Bonus",
+  "allowance": "Allowance",
+  "loan": "Loan",
+  "food": "Food",
+  "beauty": "Beauty",
+  "transportation": "Transportation",
+  "household": "Household",
+  "apparel": "Apparel",
+  "selfDevelopment": "SelfDevelopment",
+  "health": "Health",
+  "education": "Education",
+
+  "total": "Total",
+  "delete": "Delete",
+  "deleted_successfully": "Transaction Deleted Successfully",
+
+
   "change_language": "Change Language"
 
 }

@@ -40,10 +40,9 @@ class ReportCubit extends Cubit<ReportState> {
     for (TransactionEntity transactionEntity in transactionEntities) {
       found = false;
       for (TransactionTypeTotal total in totals) {
-        print('${transactionEntity.type} ${type}');
-        if (total.transactionEntity.type.id == transactionEntity.id &&
+        if (total.transactionEntity.type.id == transactionEntity.type.id &&
             transactionEntity.type.type == type) {
-          totals[totals.indexOf(total)].copyWith(
+          totals[totals.indexOf(total)] = totals[totals.indexOf(total)].copyWith(
             amount: totals[totals.indexOf(total)].amount + transactionEntity.amount,
           );
           totalAmount += transactionEntity.amount;

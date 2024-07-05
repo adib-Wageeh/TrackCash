@@ -1,11 +1,18 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:track_cash/core/data/model/transaction.dart';
+import 'package:track_cash/core/enums/transaction_type.dart';
+import 'package:track_cash/core/res/colors.dart';
+import 'package:track_cash/ui/screens/calender/cubit/calendar_cubit.dart';
 import 'package:track_cash/ui/screens/calender/widgets/row_transaction_widget.dart';
 
 class TransactionsListWidget extends StatelessWidget {
 
   final List<TransactionEntity> transactions;
-  const TransactionsListWidget({required this.transactions,Key? key}) : super(key: key);
+  final CalendarCubit cubit;
+  const TransactionsListWidget({
+  required this.cubit
+  ,required this.transactions,Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +23,29 @@ class TransactionsListWidget extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: InkWell(
-                onTap: (){},
-                onLongPress: (){},
+                onTap: (){
+                  showAdaptiveDialog(context: context, builder: (context){
+                    return AlertDialog.adaptive(
+                      backgroundColor: AppColors.primaryColor,
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(transactions[index].type.category.translate()),
+                          Text(transactions[index].amount.toString()),
+                        ],
+                      ),
+                      content: Text(transactions[index].description),
+                      actions: [
+                        ElevatedButton(
+                        style: ElevatedButton.styleFrom(backgroundColor: AppColors.red)
+                        ,onPressed: (){
+                          Navigator.of(context).pop();
+                          cubit.removeTransaction(transactions[index]);
+                        }, child: Text('delete'.tr()))
+                      ],
+                    );
+                  });
+                },
                 borderRadius: BorderRadius.circular(36),
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 12),

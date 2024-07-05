@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:scale_button/scale_button.dart';
-import 'package:track_cash/core/assets/assets.dart';
 import 'package:track_cash/core/res/colors.dart';
 
 class AddTransactionButton extends StatelessWidget {
@@ -23,8 +23,8 @@ class AddTransactionButton extends StatelessWidget {
             color: AppColors.secondaryColor,
             borderRadius: BorderRadius.all(Radius.circular(24.0)),
           ),
-          child: const Text(
-            "Save",
+          child: Text(
+            "save".tr(),
             style: TextStyle(color: Colors.white,fontSize: 16),
           ),
         ),),

@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:track_cash/core/enums/transaction_type.dart';
 
 class TransactionEntity extends Equatable {
   final int id;
@@ -22,7 +23,7 @@ class TransactionEntity extends Equatable {
 
 class TransactionType {
   final int id;
-  final String category;
+  final transactionTypeEnum category;
   final int type;
   final String imagePath;
   final Color color;
@@ -30,7 +31,7 @@ class TransactionType {
   factory TransactionType.firstIncome() {
     return TransactionType(
         id: 1,
-        category: "Salary",
+        category: transactionTypeEnum.salary,
         type: 1,
         imagePath: "assets/income/money.png",
         color: Color(0xff4ea0ee));
@@ -39,7 +40,7 @@ class TransactionType {
   factory TransactionType.firstExpense() {
     return TransactionType(
         id: 1,
-        category: "Food",
+        category: transactionTypeEnum.food,
         type: 2,
         imagePath: "assets/expense/grocery.png",
         color: Color(0xff4ea0ee));
@@ -48,25 +49,25 @@ class TransactionType {
   static List<TransactionType> get incomeTypes => [
         TransactionType(
             id: 1,
-            category: "Salary",
+            category: transactionTypeEnum.salary,
             type: 1,
             imagePath: "assets/income/money.png",
             color: Color(0xff4ea0ee)),
     TransactionType(
         id: 2,
-        category: "Bonus",
+        category: transactionTypeEnum.bonus,
         type: 1,
         imagePath: "assets/income/gift.png",
         color: Color(0xffEDC73B)),
     TransactionType(
         id: 3,
-        category: "Allowance",
+        category: transactionTypeEnum.allowance,
         type: 1,
         imagePath: "assets/income/give-money.png",
         color: Color(0xff37C9A6)),
     TransactionType(
         id: 4,
-        category: "Loan",
+        category: transactionTypeEnum.loan,
         type: 1,
         imagePath: "assets/income/signing.png",
         color: Color(0xffCC45EE)),
@@ -76,49 +77,49 @@ class TransactionType {
   static List<TransactionType> get expenseTypes => [
     TransactionType(
         id: 1,
-        category: "Food",
+        category: transactionTypeEnum.food,
         type: 2,
         imagePath: "assets/expense/grocery.png",
         color: Color(0xff4ea0ee)),
     TransactionType(
         id: 2,
-        category: "Beauty",
+        category: transactionTypeEnum.beauty,
         type: 2,
         imagePath: "assets/expense/skincare.png",
         color: Color(0xffE76161)),
     TransactionType(
         id: 3,
-        category: "Transportation",
+        category: transactionTypeEnum.transportation,
         type: 2,
         imagePath: "assets/expense/bus.png",
         color: Color(0xff37C9A6)),
     TransactionType(
         id: 4,
-        category: "Household",
+        category: transactionTypeEnum.household,
         type: 2,
         imagePath: "assets/expense/home.png",
         color: Color(0xffCC45EE)),
     TransactionType(
         id: 5,
-        category: "Apparel",
+        category: transactionTypeEnum.apparel,
         type: 2,
         imagePath: "assets/expense/wardrobe.png",
         color: Color(0xffF99B7D)),
     TransactionType(
         id: 6,
-        category: "SelfDevelopment",
+        category: transactionTypeEnum.selfDevelopment,
         type: 2,
         imagePath: "assets/expense/specification.png",
         color: Color(0xffEDC73B)),
     TransactionType(
         id: 7,
-        category: "Health",
+        category: transactionTypeEnum.health,
         type: 2,
         imagePath: "assets/expense/healthcare.png",
         color: Color(0xff917FB3)),
     TransactionType(
         id: 8,
-        category: "Education",
+        category: transactionTypeEnum.education,
         type: 2,
         imagePath: "assets/expense/education.png",
         color: Color(0xff9E6F21)),

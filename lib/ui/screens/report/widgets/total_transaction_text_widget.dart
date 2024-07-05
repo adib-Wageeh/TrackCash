@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class TotalTransactionTextWidget extends StatelessWidget {
@@ -12,7 +13,7 @@ class TotalTransactionTextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Text("Total ${(isIncome)?'Income':'Expense'} = ${totalSpent.toString()}"),
+      child: Text("${'total'.tr()} ${(isIncome)?'income'.tr():'expense'.tr()} = ${totalSpent.toString()}"),
     );
   }
 }

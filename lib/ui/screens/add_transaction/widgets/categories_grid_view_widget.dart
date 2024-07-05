@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:track_cash/core/data/model/transaction.dart';
 import 'category_widget.dart';
@@ -19,10 +20,11 @@ class CategoriesGridViewWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(left: 16.0, bottom: 8),
-          child: Text("Categories", style: TextStyle(fontSize: 16)),
+         Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0),
+          child: Text("categories".tr(), style: TextStyle(fontSize: 16)),
         ),
+        SizedBox(height: 8.0),
         GridView(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),

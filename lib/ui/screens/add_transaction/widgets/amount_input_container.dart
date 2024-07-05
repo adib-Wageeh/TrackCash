@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:track_cash/core/assets/assets.dart';
 import 'package:track_cash/core/res/colors.dart';
 
 class AmountInputContainer extends StatelessWidget {

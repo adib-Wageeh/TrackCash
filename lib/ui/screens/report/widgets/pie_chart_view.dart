@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:track_cash/core/enums/transaction_type.dart';
 import '../../../../core/data/model/transaction_type_total.dart';
 
 class PieChartViewWidget extends StatelessWidget {
@@ -21,12 +22,12 @@ class PieChartViewWidget extends StatelessWidget {
             sections:
             transactions.map((e) {
               return PieChartSectionData(
-                title: e.transactionEntity.type.category,
+                title: e.transactionEntity.type.category.translate(),
                 badgePositionPercentageOffset: 1.5,
                 color: e.transactionEntity.type.color,
                 value: e.amount,
                 showTitle: false,
-                badgeWidget: Text(e.transactionEntity.type.category),
+                badgeWidget: Text(e.transactionEntity.type.category.translate()),
               );
             }).toList()
             ,),

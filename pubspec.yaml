@@ -17,7 +17,6 @@ dependencies:
   easy_localization: ^3.0.7
   get_it: ^7.3.0
   dartz: ^0.10.1
-  mockito: ^5.4.0
   gsheets: ^0.5.0
   sqflite: ^2.2.8
   provider: ^6.1.2
@@ -30,6 +29,7 @@ dependencies:
   calendar_date_picker2: ^1.1.4
   scale_button: ^2.1.2
   fl_chart: ^0.63.0
+  flutter_native_splash: ^2.3.7
   shared_preferences: ^2.1.0
   freezed: ^2.4.7
   freezed_annotation: ^2.4.1
@@ -47,7 +47,8 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/icons8.png"
+  remove_alpha_ios: true
+  image_path: "assets/app_icon.png"
 
   flutter_lints: ^2.0.0
 
@@ -56,21 +57,21 @@ flutter:
   uses-material-design: true
 
   assets:
-      - assets/box.png
-      - assets/boxWhite.png
-      - assets/expense/bus.png
-      - assets/expense/education.png
-      - assets/expense/grocery.png
-      - assets/expense/healthcare.png
-      - assets/expense/home.png
-      - assets/expense/skincare.png
-      - assets/expense/specification.png
-      - assets/expense/wardrobe.png
-      - assets/income/gift.png
-      - assets/income/give-money.png
-      - assets/income/money.png
-      - assets/income/signing.png
+      - assets/
+      - assets/expense/
+      - assets/income/
       - assets/translations/
+      - assets/fonts/
+
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Roboto-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Roboto-Light.ttf
+          weight: 300
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

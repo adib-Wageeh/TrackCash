@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "156321581595",
+    "project_id": "reddit-clone-35678",
+    "storage_bucket": "reddit-clone-35678.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:156321581595:android:1c592d3e7314e2fd3a06be",
+        "android_client_info": {
+          "package_name": "com.adib.trackcash"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGAAZQh5YP11B8o9dpUKjNKnb5okgf5Rg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

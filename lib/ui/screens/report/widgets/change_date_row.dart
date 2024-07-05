@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ChangeDateRow extends StatelessWidget {
@@ -13,6 +14,7 @@ class ChangeDateRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dateFormat = DateFormat("yyyy/MM",context.locale.languageCode);
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
       child: Row(
@@ -20,7 +22,7 @@ class ChangeDateRow extends StatelessWidget {
         children: [
           IconButton(onPressed: ()=> onPreviewsPressed(),
               icon: const Icon(Icons.arrow_back_ios)),
-          Text("${selectedDate.year.toString()}/${selectedDate.month.toString()}",style:
+          Text(dateFormat.format(selectedDate),style:
           const TextStyle(fontSize: 18)),
           IconButton(onPressed: ()=> onNextPressed(),
               icon: const Icon(Icons.arrow_forward_ios)),

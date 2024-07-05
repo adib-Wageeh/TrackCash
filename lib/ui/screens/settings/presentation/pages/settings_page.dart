@@ -11,9 +11,11 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: AppColors.primaryColor,
         appBar: AppBar(
           backgroundColor: AppColors.secondaryColor,
           title: Text('settings'.tr()),
+          elevation: 0,
         ),
         body: Column(
           children: [

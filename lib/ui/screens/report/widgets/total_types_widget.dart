@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:track_cash/core/enums/transaction_type.dart';
 import '../../../../core/data/model/transaction_type_total.dart';
 
 class TotalTypesWidget extends StatelessWidget {
@@ -30,7 +31,7 @@ class TotalTypesWidget extends StatelessWidget {
                 SizedBox(
                   width: 10,
                 ),
-                Text(transactions[index].transactionEntity.type.category,
+                Text(transactions[index].transactionEntity.type.category.translate(),
                     style: TextStyle(
                         color:
                             transactions[index].transactionEntity.type.color)),

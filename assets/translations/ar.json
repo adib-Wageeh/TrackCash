@@ -5,7 +5,36 @@
   "add": "الإضافة",
   "report": "التقرير",
   "settings": "الأعدادات",
+
   "no_transactions": "لم يتم إضافة معاملات بعد",
+  "transaction_added": "تم إضافة المعاملة بنجاح",
+  "amount": "المبلغ",
+  "amount_required": "المبلغ مطلوب",
+  "amount_error": "أدخل مبلغ صحيح",
+  "notes": "ملاحظات",
+  "save": "حفظ",
+  "income": "مدخولات",
+  "expense": "مصروفات",
+  "select_date": "أختر التاريخ",
+  "categories": "الفئات",
+  "salary": "مرتب",
+  "bonus": "حافز",
+  "allowance": "بدائل",
+  "loan": "قرض",
+  "food": "طعام",
+  "beauty": "جمال",
+  "transportation": "مواصلات",
+  "household": "منزلى",
+  "apparel": "ملابس",
+  "selfDevelopment": "تطوير النفس",
+  "health": "الصحه",
+  "education": "التعليم",
+
+  "total": "إجمالى",
+  "delete": "حذف",
+  "deleted_successfully": "تم حذف المعاملة بنجاح",
+
+
   "change_language": "تغيير اللغة"
 
 }

@@ -14,7 +14,7 @@ class LocalDataSource implements TransactionDatasource {
     Database dbRef = await db;
     int result = await dbRef.rawInsert('''
     INSERT INTO transactions(category,type,day,month,year,amount,description,transactionTypeId) VALUES 
-    ("${transactionType.category}","${transactionType.type}",
+    ("${transactionType.category.name}","${transactionType.type}",
     "${dateTime.day}","${dateTime.month}","${dateTime.year}",${amount.toString()},
     "${description.toString()}","${transactionType.id}"
     )

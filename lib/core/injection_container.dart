@@ -25,7 +25,6 @@ Future<void> init() async {
         version: 1,
         onUpgrade: _onUpgrade,
       );
-      print('Database initialized');
       return myDb;
     })
     ..registerSingletonWithDependencies<TransactionDatasource>(
@@ -70,11 +69,3 @@ Future<void> _onCreate(Database db, int version) async {
     ''');
 }
 
-Future<void> _dropTable(Database db, String tableName) async {
-  try {
-    await db.execute('DROP TABLE IF EXISTS $tableName');
-    print('Table $tableName dropped successfully.');
-  } catch (e) {
-    print('Error occurred while dropping table $tableName: $e');
-  }
-}

@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:track_cash/core/data/model/transaction.dart';
+import 'package:track_cash/core/res/colors.dart';
 import 'package:track_cash/core/utils/common_functions.dart';
 import 'package:track_cash/ui/screens/add_transaction/cubit/add_transaction_cubit.dart';
 import 'package:track_cash/ui/screens/add_transaction/cubit/add_transaction_state.dart';
@@ -23,7 +25,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
       final cubit = AddTransactionCubit.get(context);
       if(cubit.transactionAdded){
         cubit.transactionAdded = false;
-        showSuccessToast(context, "Transaction added successfully");
+        showSuccessToast(context, "transaction_added".tr());
       }
     } else if (state.isError) {
       state.mapOrNull(error: (data) {
@@ -48,6 +50,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.primaryColor,
       body: BlocProvider<AddTransactionCubit>(
         lazy: false,
         create: (_) => AddTransactionCubit(),
@@ -80,7 +83,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                       },
                     ),
                     AmountInputContainer(
-                      labelText: "Amount",
+                      labelText: "amount".tr(),
                       textEditingController: amountController,
                       textInputType: TextInputType.number,
                     ),
@@ -106,7 +109,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                           : TransactionType.expenseTypes,
                     ),
                     AmountInputContainer(
-                      labelText: "Description",
+                      labelText: "notes".tr(),
                       textEditingController: descriptionController,
                       textInputType: TextInputType.text,
                       minLines: 3,
@@ -114,12 +117,12 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                     AddTransactionButton(
                       onTap: () {
                         if (amountController.text.trim().isEmpty) {
-                          showErrorToast(context, "Amount is required");
+                          showErrorToast(context, "amount_required".tr());
                         } else {
                           if (double.tryParse(amountController.text.trim()) ==
                                   null ||
                               double.parse(amountController.text.trim()) < 0) {
-                            showErrorToast(context, "Enter a valid amount");
+                            showErrorToast(context, "amount_error".tr());
                           } else {
                             cubit.addTransaction(
                                 amount:
@@ -127,6 +130,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                                 selectedDate: selectedDate,
                                 transactionType: selectedTransactionType,
                                 description: descriptionController.text.trim());
+                            selectedDate = DateTime.now();
                             amountController.clear();
                             descriptionController.clear();
                           }

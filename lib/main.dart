@@ -27,8 +27,7 @@ void main() async {
     fallbackLocale: const Locale(TranslationsConstants.localeEN),
     useOnlyLangCode: true,
     child: ChangeNotifierProvider<LocaleProvider>(
-    create: (context) => LocaleProvider()
-    ,child: HomePage()),
+        create: (context) => LocaleProvider(), child: HomePage()),
   ));
 }
 
@@ -66,48 +65,49 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              localizationsDelegates: context.localizationDelegates,
-              supportedLocales: context.supportedLocales,
-              locale: context.locale,
-              home: Consumer<LocaleProvider>(
-                builder: (context, _,__) {
-                  print('update');
-                  return Scaffold(
-                    body: PageView(
-                      controller: _pageController,
-                      physics: NeverScrollableScrollPhysics(),
-                      onPageChanged: (index) {
-                        setState(() {
-                          currentIndex = index;
-                        });
-                      },
-                      children: const [
-                        CalendarScreen(),
-                        AddTransactionScreen(),
-                        ReportScreen(),
-                        SettingsScreen(),
-                      ],
-                    ),
-                    bottomNavigationBar: ConvexAppBar(
-                        height: 55,
-                        top: -20,
-                        initialActiveIndex: currentIndex,
-                        elevation: 5,
-                        color: AppColors.primaryColor,
-                        backgroundColor: AppColors.secondaryColor,
-                        items: [
-                          TabItem(icon: Icons.calendar_month_rounded, title: 'calendar'.tr()),
-                          TabItem(icon: Icons.add, title: 'add'.tr()),
-                          TabItem(icon: Icons.query_stats_rounded, title: 'report'.tr()),
-                          TabItem(icon: Icons.settings, title: 'settings'.tr()),
-                        ],
-                        onTap: onTabTapped),
-                  );
-                }
-              ),
-            );
-      }
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
+      theme: ThemeData(
+        fontFamily: 'Roboto',
+      ),
+      home: Consumer<LocaleProvider>(builder: (context, _, __) {
+        print('update');
+        return Scaffold(
+          backgroundColor: AppColors.primaryColor,
+          body: PageView(
+            controller: _pageController,
+            physics: NeverScrollableScrollPhysics(),
+            onPageChanged: (index) {
+              setState(() {
+                currentIndex = index;
+              });
+            },
+            children: const [
+              CalendarScreen(),
+              AddTransactionScreen(),
+              ReportScreen(),
+              SettingsScreen(),
+            ],
+          ),
+          bottomNavigationBar: ConvexAppBar(
+              height: 55,
+              top: -20,
+              initialActiveIndex: currentIndex,
+              elevation: 0,
+              color: AppColors.primaryColor,
+              backgroundColor: AppColors.secondaryColor,
+              items: [
+                TabItem(
+                    icon: Icons.calendar_month_rounded, title: 'calendar'.tr()),
+                TabItem(icon: Icons.add, title: 'add'.tr()),
+                TabItem(icon: Icons.query_stats_rounded, title: 'report'.tr()),
+                TabItem(icon: Icons.settings, title: 'settings'.tr()),
+              ],
+              onTap: onTabTapped),
+        );
+      }),
+    );
+  }
 }
-
-

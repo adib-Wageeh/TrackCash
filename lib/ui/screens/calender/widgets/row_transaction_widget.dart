@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:track_cash/core/data/model/transaction.dart';
+import 'package:track_cash/core/enums/transaction_type.dart';
 
 class RowTransactionWidget extends StatelessWidget {
   const RowTransactionWidget({
@@ -25,7 +26,7 @@ class RowTransactionWidget extends StatelessWidget {
                 width: 30,
               )),
         ),
-        Text(transactionEntity.type.category,
+        Text(transactionEntity.type.category.translate(),
             style: TextStyle(color: transactionEntity.type.color)),
         const Spacer(),
         Text(

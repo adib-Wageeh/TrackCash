@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:track_cash/core/data/model/transaction.dart';
+import 'package:track_cash/core/enums/transaction_type.dart';
 
 class CategoryWidget extends StatelessWidget {
   final TransactionType type;
@@ -36,7 +37,7 @@ class CategoryWidget extends StatelessWidget {
           ),
           FittedBox(
             child: Text(
-              type.category,
+              type.category.translate(),
               overflow: TextOverflow.ellipsis,
               style: TextStyle(color: (isSelected) ? type.color : Colors.black),
             ),

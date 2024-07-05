@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:track_cash/core/assets/assets.dart';
 import 'package:track_cash/core/res/colors.dart';
 import 'package:track_cash/core/utils/common_functions.dart';
 import 'package:track_cash/ui/screens/calender/cubit/calendar_cubit.dart';
@@ -20,6 +19,11 @@ class CalendarScreen extends StatefulWidget {
 class _CalendarScreenState extends State<CalendarScreen> {
   void _onStateChangeListener(BuildContext context, CalendarState state) {
     if (state.isSuccess) {
+      final cubit = CalendarCubit.get(context);
+      if(cubit.transactionsRemoved){
+        showSuccessToast(context, 'deleted_successfully'.tr());
+        cubit.transactionsRemoved = false;
+      }
     } else if (state.isError) {
       state.mapOrNull(error: (data) {
         final error = data.failure?.error;
@@ -36,10 +40,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
       lazy: false,
       create: (_) => CalendarCubit()..getTransactions(selectedDay),
       child: Scaffold(
+        backgroundColor: AppColors.primaryColor,
         appBar: AppBar(
             backgroundColor: AppColors.secondaryColor,
+            elevation: 0,
             title: Text("app_name".tr(),
-                style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700))),
+                style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold))),
         body: BlocConsumer<CalendarCubit, CalendarState>(
             listener: _onStateChangeListener,
             builder: (context, state) {
@@ -68,7 +74,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     (cubit.transactions!.isEmpty)
                         ? const EmptyDayWidget()
                         : TransactionsListWidget(
-                            transactions: cubit.transactions!)
+                            cubit: cubit, transactions: cubit.transactions!),
+                    SizedBox(height: 16,)
                   ],
                 );
               }

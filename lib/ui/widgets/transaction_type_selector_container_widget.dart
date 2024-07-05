@@ -1,7 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:track_cash/core/res/colors.dart';
 import 'package:track_cash/ui/widgets/transaction_type_button_widget.dart';
-import '../../../core/assets/assets.dart';
 
 class TransactionTypeSelectorContainerWidget extends StatelessWidget {
   const TransactionTypeSelectorContainerWidget({Key? key,required this.isIncome,required this.onPressed}) : super(key: key);
@@ -21,10 +21,10 @@ class TransactionTypeSelectorContainerWidget extends StatelessWidget {
               children: [
                 TransactionTypeButtonWidget(
                 onPressed: ()=>onPressed(1)
-                ,text: "INCOME",isSelected: isIncome,),
+                ,text: "income".tr(),isSelected: isIncome,),
                 TransactionTypeButtonWidget(
                   onPressed: ()=>onPressed(2),
-                  text: "EXPENSE",isSelected: !isIncome,)
+                  text: "expense".tr(),isSelected: !isIncome,)
               ],
             )
     );

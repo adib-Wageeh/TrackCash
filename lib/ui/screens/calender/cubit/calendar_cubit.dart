@@ -11,6 +11,7 @@ class CalendarCubit extends Cubit<CalendarState> {
 
   late final CalendarRepository _calenderRepository;
   List<TransactionEntity>? _transactions;
+  bool transactionsRemoved = false;
 
   CalendarCubit({
     CalendarRepository? calenderRepository,
@@ -34,6 +35,19 @@ class CalendarCubit extends Cubit<CalendarState> {
 
   }
 
-  List<TransactionEntity>? get transactions => _transactions;
+  Future<void> removeTransaction(TransactionEntity transactionEntity) async {
+    emit(CalendarState.loading());
 
+    final result = await _calenderRepository.removeTransaction(transactionEntity);
+
+    result.fold((error){
+      print(error);
+      emit(CalendarState.error(error));
+    }, (transactions){
+      getTransactions(transactionEntity.date);
+    });
+
+  }
+
+  List<TransactionEntity>? get transactions => _transactions;
 }
